@@ -1,3 +1,16 @@
-{{item.name}}
-<table><tr><td><input [(ngModel)]="item.name" placeholder="name"></td><td>{{item.gotIt}}</td></tr></table>
+<input [(ngModel)]="newItem" placeholder="Add a shopping item">
+<button (click)="add()">add</button>
+<h3>Pending items</h3>
+<ul>
+  <li *ngFor="let item of pendingItems">
+    <span>{{item}}</span>
+    <button (click)="cart(item)">I got it</button>
+    <button (click)="remove(item)">remove</button>
+  </li>
+</ul>
 
+<h3>Items in my Cart</h3>
+<li *ngFor="let item of cartedItems">
+  <span>{{item}}</span>
+  <button (click)="pending(item)">pending</button>
+</li>
