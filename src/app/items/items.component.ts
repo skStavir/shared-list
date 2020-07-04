@@ -31,8 +31,6 @@ export class ItemsComponent implements OnInit {
     this.pendingItems.push(this.newItem);
     this.resetInput();
     this.pendingTable.renderRows();
-
-
   }
 
   cart(item): void {
@@ -55,6 +53,14 @@ export class ItemsComponent implements OnInit {
       this.pendingItems.splice(index, 1);
       this.pendingTable.renderRows();
     }
+  }
+
+  doneShopping(): void {
+    alert('Thank you for using Quick shopping list. See you again');
+    this.pendingItems = [];
+    this.cartedItems = [];
+    this.pendingTable.renderRows();
+    this.cartTable.renderRows();
   }
 
   private resetInput(): void {
