@@ -2,8 +2,8 @@
 <section>
   <div class="row">
     <mat-form-field>
-      <mat-label>Enter an item</mat-label>
-      <input matInput [(ngModel)]="newItem"/>
+      <mat-label>{{inputPlaceHolder}}</mat-label>
+      <input matInput [(ngModel)]="newItem" name="newItemInput"/>
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="add()">add item</button>
   </div>

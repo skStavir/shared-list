@@ -8,6 +8,7 @@ import {MatTable} from '@angular/material/table';
 })
 export class ItemsComponent implements OnInit {
   newItem: string;
+  inputPlaceHolder: string;
   pendingItems = ['Atta'];
   cartedItems = ['Rice'];
 
@@ -15,15 +16,23 @@ export class ItemsComponent implements OnInit {
   @ViewChild('cartTable') cartTable: MatTable<any>;
 
   constructor() {
+    this.newItem = '';
+    this.setDefaultPlaceholder();
   }
 
   ngOnInit(): void {
   }
 
   add(): void {
+    if (this.newItem.trim() === '') {
+      this.inputPlaceHolder = 'Please enter a valid item';
+      return;
+    }
     this.pendingItems.push(this.newItem);
-    this.newItem = '';
+    this.resetInput();
     this.pendingTable.renderRows();
+
+
   }
 
   cart(item): void {
@@ -48,12 +57,13 @@ export class ItemsComponent implements OnInit {
     }
   }
 
-  removeFromCart(item): void {
-    const index = this.pendingItems.indexOf(item, 0);
-    if (index > -1) {
-      this.pendingItems.splice(index, 1);
-      this.pendingTable.renderRows();
-    }
+  private resetInput(): void {
+    this.newItem = '';
+    this.setDefaultPlaceholder();
+  }
+
+  private setDefaultPlaceholder(): void {
+    this.inputPlaceHolder = 'Enter an Item';
   }
 
   private removeItemFromPending(item): void {
