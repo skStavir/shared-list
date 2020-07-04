@@ -48,6 +48,14 @@ export class ItemsComponent implements OnInit {
     }
   }
 
+  removeFromCart(item): void {
+    const index = this.pendingItems.indexOf(item, 0);
+    if (index > -1) {
+      this.pendingItems.splice(index, 1);
+      this.pendingTable.renderRows();
+    }
+  }
+
   private removeItemFromPending(item): void {
     const index = this.pendingItems.indexOf(item, 0);
     if (index > -1) {

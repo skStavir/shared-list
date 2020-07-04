@@ -1,35 +1,72 @@
 section {
   display: table;
-  margin: 8px;
+  margin-right: 1%;
+  margin-left: 1%;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 70%;
 }
 
 .row {
   display: table-cell;
+  margin-bottom: 1px;
 }
 
 .row button {
   display: table-cell;
-  margin-right: 4px;
   margin-left: 4px;
 }
 
-.flex-container {
-  display: flex;
-  justify-content: space-between;
-  width: 480px;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  width: 120px;
-}
 
 
 table {
-  width: 90%;
+  width: 100%;
+}
+.mat-column-no {
+  flex: 0 0 10% !important;
+  width: 10% !important;
+}
+
+.mat-column-item {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 40% !important;
+  width: 50% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-gotIt {
+  flex: 0 0 25% !important;
+  width: 20% !important;
+}
+
+.mat-column-remove {
+  flex: 0 0 25% !important;
+  width: 20% !important;
+}
+
+.mat-column-filler {
+  flex: 0 0 20% !important;
+  width: 20% !important;
+}
+
+.mat-column-carted {
+  flex: 0 0 20% !important;
+  width: 20% !important;
 }
 
 mat-divider{
-  margin-top: 5%;
+  margin-bottom: 5px;
 }
+
+
