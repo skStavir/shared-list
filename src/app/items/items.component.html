@@ -1,13 +1,33 @@
 <mat-toolbar color="primary">Quick Shopping List</mat-toolbar>
-<section>
-  <div class="row">
-    <mat-form-field>
-      <mat-label>{{inputPlaceHolder}}</mat-label>
-      <input matInput [(ngModel)]="newItem" name="newItemInput"/>
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="add()">add item</button>
-  </div>
-</section>
+<table mat-table class="mat-elevation-z8" [dataSource]="[1]" #inputTable="matTable">
+
+  <ng-container matColumnDef="no">
+    <th mat-header-cell *matHeaderCellDef> No</th>
+    <td mat-cell *matCellDef="let item"></td>
+  </ng-container>
+
+  <ng-container matColumnDef="itemInput">
+    <th mat-header-cell *matHeaderCellDef> itemInput</th>
+    <td mat-cell *matCellDef="let item" class="mat-body-2">
+      <mat-form-field>
+        <mat-label>{{inputPlaceHolder}}</mat-label>
+        <input matInput [(ngModel)]="newItem" name="newItemInput"/>
+      </mat-form-field>
+    </td>
+
+  </ng-container>
+
+  <ng-container matColumnDef="add">
+    <th mat-header-cell *matHeaderCellDef> Add</th>
+    <td mat-cell *matCellDef="let item">
+      <button mat-raised-button color="primary" (click)="add()">add item</button>
+    </td>
+  </ng-container>
+
+  <tr mat-row *matRowDef="let row; columns: ['no','itemInput', 'add'];"></tr>
+</table>
+
+
 <mat-divider></mat-divider>
 
 <h3 matSubheader>My shopping list</h3>
@@ -27,7 +47,7 @@
   <ng-container matColumnDef="gotIt">
     <th mat-header-cell *matHeaderCellDef> Picked</th>
     <td mat-cell *matCellDef="let item">
-      <button mat-raised-button color="primary" (click)="cart(item)">picked</button>
+      <button mat-raised-button color="success" (click)="cart(item)">picked</button>
     </td>
   </ng-container>
 

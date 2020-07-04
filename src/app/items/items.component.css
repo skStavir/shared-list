@@ -1,24 +1,7 @@
-section {
-  display: table;
-  margin-right: 1%;
-  margin-left: 1%;
-  width: 100%;
-}
 
 mat-form-field {
-  width: 70%;
+  width: 96%;
 }
-
-.row {
-  display: table-cell;
-  margin-bottom: 1px;
-}
-
-.row button {
-  display: table-cell;
-  margin-left: 4px;
-}
-
 
 table {
   width: 100%;
@@ -32,7 +15,7 @@ table {
 .mat-column-item {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 40% !important;
+  flex: 0 0 50% !important;
   width: 50% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -46,12 +29,12 @@ table {
 }
 
 .mat-column-gotIt {
-  flex: 0 0 25% !important;
+  flex: 0 0 20% !important;
   width: 20% !important;
 }
 
 .mat-column-remove {
-  flex: 0 0 25% !important;
+  flex: 0 0 20% !important;
   width: 20% !important;
 }
 
@@ -65,7 +48,35 @@ table {
   width: 20% !important;
 }
 
+.mat-column-itemInput {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 70% !important;
+  width: 70% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+
+.mat-column-add {
+  flex: 0 0 20% !important;
+  width: 20% !important;
+}
+
+
 mat-divider {
   margin-bottom: 5px;
+}
+
+.mat-success {
+  background-color: green;
+  color: #fff;
 }
 
