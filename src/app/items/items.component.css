@@ -29,3 +29,7 @@ section {
 table {
   width: 90%;
 }
+
+mat-divider{
+  margin-top: 5%;
+}

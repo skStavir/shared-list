@@ -1,3 +1,5 @@
+
+<mat-toolbar color="primary">Quick Shopping List</mat-toolbar>
 <section>
   <div class="row">
     <mat-form-field>
@@ -7,7 +9,7 @@
     <button mat-raised-button color="primary" (click)="add()">add item</button>
   </div>
 </section>
-
+<mat-divider></mat-divider>
 
 <h3 matSubheader>Pending items</h3>
 
@@ -41,7 +43,7 @@
   <tr mat-row *matRowDef="let row; columns: ['No', 'item', 'gotIt', 'remove'];"></tr>
 </table>
 
-
+<mat-divider></mat-divider>
 <h3 matSubheader>Items in my Cart</h3>
 <table mat-table [dataSource]="cartedItems" class="mat-elevation-z8" #cartTable="matTable">
 
