@@ -1,16 +1,34 @@
-<input [(ngModel)]="newItem" placeholder="Add a shopping item">
-<button (click)="add()">add</button>
-<h3>Pending items</h3>
-<ul>
-  <li *ngFor="let item of pendingItems">
-    <span>{{item}}</span>
-    <button (click)="cart(item)">I got it</button>
-    <button (click)="remove(item)">remove</button>
-  </li>
-</ul>
+<section>
+  <div class="row">
+    <mat-form-field>
+      <mat-label>Add a shopping item</mat-label>
+      <input matInput [(ngModel)]="newItem"/>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="add()">add item</button>
+  </div>
+</section>
 
-<h3>Items in my Cart</h3>
-<li *ngFor="let item of cartedItems">
-  <span>{{item}}</span>
-  <button (click)="pending(item)">pending</button>
-</li>
+
+<h3 matSubheader>Pending items</h3>
+<section>
+  <div class="row">
+    <mat-action-list>
+      <mat-list-item *ngFor="let item of pendingItems">
+        <span>{{item}}</span>
+        <button mat-raised-button color="accent" (click)="cart(item)">I got it</button>
+        <button mat-raised-button color="warn" (click)="remove(item)">remove</button>
+      </mat-list-item>
+    </mat-action-list>
+  </div>
+</section>
+
+<h3 matSubheader>Items in my Cart</h3>
+<section>
+  <mat-action-list>
+    <mat-list-item *ngFor="let item of cartedItems">
+      <span>{{item}}</span>
+      <button button mat-raised-button color="accent" (click)="pending(item)">pending</button>
+    </mat-list-item>
+  </mat-action-list>
+</section>
+
