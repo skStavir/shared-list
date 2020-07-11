@@ -17,7 +17,7 @@ function buildInitialShoppingList(id) {
     TableName: 'shoppinglist',
     Item: {
       'id': id,
-      'items': ['rice', 'pen'],
+      'pending': ['rice', 'pen'],
       'cart': ['atta', 'pencil'],
     }
   };
@@ -60,7 +60,7 @@ exports.handler = async (event) => {
     //TODO use uuid
     id = generateId();
     let newParams = buildInitialShoppingList(id);
-    console.log('initializing database with generated id: ' + id);
+    console.log('initializing database with generated id: ' +id);
     await dynamoDb.put(newParams, writeCallBack()).promise();
   }
 
@@ -73,3 +73,4 @@ exports.handler = async (event) => {
   //TODO build failure payloads
   return buildSuccessPayload(JSON.stringify(shoppinglist.Item));
 };
+
