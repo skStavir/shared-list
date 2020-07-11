@@ -1,8 +1,8 @@
 const AWS = require("aws-sdk");
 
 
-AWS.config.update({region: 'ap-south-1'});
-const dynamoDb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
+AWS.config.update({ region: 'ap-south-1' });
+const dynamoDb = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
 
 const params = {
   TableName: 'shoppinglist',
@@ -10,28 +10,17 @@ const params = {
 
 
 function writeCallBack() {
-  return function (err, data) {
+  return function(err, data) {
     if (err) {
       console.log("Error in updating data", err);
-      return {
-        'statuCode': 500,
-        'body': JSON.stringify(err)
-      };
-    } else {
-      console.log("Successfully updated data", data);
-      return {
-        'statuCode': 500
-      };
     }
   };
 }
 
 function readCallBack() {
-  return function (err, data) {
+  return function(err, data) {
     if (err) {
-      return 'Error';
-    } else {
-      return AWS.DynamoDB.Converter.unmarshall(data.Item);
+      console.log('Error');
     }
   };
 }
@@ -39,33 +28,50 @@ function readCallBack() {
 function buildSuccessPayload(shoppinglist) {
   return {
     'statusCode': 200,
-    'body': JSON.stringify(shoppinglist),
+    'body': shoppinglist,
     'isBase64Encoded': false
   };
 }
 
-exports.handler = async (event) => {
-  let payload = event.payload;
+exports.handler = async(event) => {
 
-  if (typeof event.payload != 'undefined' || !event.payload || !event.payload.id) {
+  console.log("body: " + event.body);
+
+
+  let payload;
+  if (typeof event.body === 'undefined' || !event.body) {
+
     return {
       'statuCode': 400,
-      'body': 'Invalid payload ' + JSON.stringify(event.payload)
+      'body': 'Invalid payload ' + JSON.stringify(event),
+      'isBase64Encoded': false
+    }
+  }
+  else {
+    payload = JSON.parse(event.body);
+    if (!payload.id) {
+      return {
+        'statuCode': 400,
+        'body': 'Invalid payload, if of the entry is missing',
+        'isBase64Encoded': false
+      }
     }
   }
 
-  let updateResponse = await dynamoDb.put(event.payload, writeCallBack()).promise();
-  if (updateResponse.statuCode != 200) {
-    return updateResponse;
+  //TODO exception handling
+  let writeParams = {
+    TableName: 'shoppinglist',
+    Item: payload
   }
+  let updateResponse = await dynamoDb.put(writeParams, writeCallBack()).promise();
 
 
   params.Key = {
-    'id': event.payload.id
+    'id': payload.id
   };
   let shoppinglist = await dynamoDb.get(params, readCallBack()).promise();
 
-  console.log(shoppinglist);
+  console.log('Data after update' + JSON.stringify(shoppinglist.Item));
   //TODO build failure payloads
-  return buildSuccessPayload(shoppinglist);
+  return buildSuccessPayload(JSON.stringify(shoppinglist.Item));
 };
