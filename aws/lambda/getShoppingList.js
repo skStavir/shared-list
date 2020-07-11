@@ -8,6 +8,50 @@ const params = {
   TableName: 'shoppinglist',
 };
 
+function generateId() {
+  return Math.random().toString().substring(2);
+}
+
+function buildInitialShoppingList(id) {
+  let newParams = {
+    TableName: 'shoppinglist',
+    Item: {
+      'id': id,
+      'items': ['rice', 'pen'],
+      'cart': ['atta', 'pencil'],
+    }
+  };
+  return newParams;
+}
+
+function writeCallBack() {
+  return function (err, data) {
+    if (err) {
+      console.log("Error in initializing data", err);
+    } else {
+      console.log("Successfully initialized data", data);
+    }
+  };
+}
+
+function readCallBack() {
+  return function (err, data) {
+    if (err) {
+      return 'Error';
+    } else {
+      return AWS.DynamoDB.Converter.unmarshall(data.Item);
+    }
+  };
+}
+
+function buildSuccessPayload(shoppinglist) {
+  return {
+    'statusCode': 200,
+    'body': JSON.stringify(shoppinglist),
+    'isBase64Encoded': false
+  };
+}
+
 exports.handler = async (event) => {
   let id;
 
@@ -17,39 +61,17 @@ exports.handler = async (event) => {
 
   if (typeof id === 'undefined' || !id) {
     //TODO use uuid
-    id = Math.random().toString().substring(2);
-    let newParams = {
-      TableName: 'shoppinglist',
-      Item: {
-        'id': id,
-        'items': ['rice', 'pen'],
-        'cart': ['atta', 'pencil'],
-      }
-    };
-    await dynamoDb.put(newParams, function (err, data) {
-      if (err) {
-        console.log("Error in initializing data", err);
-      } else {
-        console.log("Successfully initialized data", data);
-      }
-    }).promise();
+    id = generateId();
+    let newParams = buildInitialShoppingList(id);
+    await dynamoDb.put(newParams, writeCallBack()).promise();
   }
 
   params.Key = {
     'id': id
   };
-  let shoppinglist = await dynamoDb.get(params, function (err, data) {
-    if (err) {
-      return 'Error';
-    } else {
-      return AWS.DynamoDB.Converter.unmarshall(data.Item);
-    }
-  }).promise();
+  let shoppinglist = await dynamoDb.get(params, readCallBack()).promise();
 
   console.log(shoppinglist);
-  return {
-    'statusCode': 200,
-    'body': JSON.stringify(shoppinglist),
-    'isBase64Encoded': false
-  };
+  //TODO build failure payloads
+  return buildSuccessPayload(shoppinglist);
 };
