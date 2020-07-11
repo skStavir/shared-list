@@ -28,8 +28,6 @@ function writeCallBack() {
   return function (err, data) {
     if (err) {
       console.log("Error in initializing data", err);
-    } else {
-      console.log("Successfully initialized data", data);
     }
   };
 }
@@ -37,9 +35,7 @@ function writeCallBack() {
 function readCallBack() {
   return function (err, data) {
     if (err) {
-      return 'Error';
-    } else {
-      return AWS.DynamoDB.Converter.unmarshall(data.Item);
+      console.log('Error reading from database');
     }
   };
 }
@@ -47,7 +43,7 @@ function readCallBack() {
 function buildSuccessPayload(shoppinglist) {
   return {
     'statusCode': 200,
-    'body': JSON.stringify(shoppinglist),
+    'body': shoppinglist,
     'isBase64Encoded': false
   };
 }
@@ -57,12 +53,14 @@ exports.handler = async (event) => {
 
   if (typeof event.pathParameters != 'undefined' && event.pathParameters) {
     id = event.pathParameters.id;
+    console.log('id: ' + id);
   }
 
   if (typeof id === 'undefined' || !id) {
     //TODO use uuid
     id = generateId();
     let newParams = buildInitialShoppingList(id);
+    console.log('initializing database with generated id: ' + id);
     await dynamoDb.put(newParams, writeCallBack()).promise();
   }
 
@@ -71,7 +69,7 @@ exports.handler = async (event) => {
   };
   let shoppinglist = await dynamoDb.get(params, readCallBack()).promise();
 
-  console.log(shoppinglist);
+  console.log("Return Shopping List " + JSON.stringify(shoppinglist.Item));
   //TODO build failure payloads
-  return buildSuccessPayload(shoppinglist);
+  return buildSuccessPayload(JSON.stringify(shoppinglist.Item));
 };
