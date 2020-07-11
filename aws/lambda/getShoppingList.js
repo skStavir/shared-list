@@ -9,7 +9,7 @@ const params = {
 
 exports.handler = async (event) => {
   params.Key = {
-    'id': '1'
+    'id': event.pathParameters.id
   };
   let shoppinglist = await dynamoDb.get(params, function (err, data) {
     if (err) {
@@ -20,5 +20,9 @@ exports.handler = async (event) => {
   }).promise();
 
   console.log(shoppinglist);
-  return shoppinglist;
+  return {
+    'statusCode': 200,
+    'body': JSON.stringify(shoppinglist),
+    'isBase64Encoded': false
+  };
 };
