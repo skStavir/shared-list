@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ItemsComponent} from './items/items.component';
 import {FormsModule} from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -14,6 +14,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatListModule,
     MatTableModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

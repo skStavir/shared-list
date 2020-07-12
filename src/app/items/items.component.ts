@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTable} from '@angular/material/table';
+import {ShoppinglistService} from './shoppinglist.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-items',
@@ -7,20 +9,44 @@ import {MatTable} from '@angular/material/table';
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent implements OnInit {
+  id: string;
   newItem: string;
   inputPlaceHolder: string;
-  pendingItems = ['Atta'];
-  cartedItems = ['Rice'];
+  pendingItems = [];
+  cartedItems = [];
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
 
-  constructor() {
+  constructor(private shoppinglistService: ShoppinglistService, private route: ActivatedRoute, private router: Router) {
     this.newItem = '';
     this.setDefaultPlaceholder();
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.id = params.id;
+      console.log('id from url: ' + this.id);
+    });
+
+    if (this.id) {
+      console.log('loading data for id : ' + this.id);
+      this.shoppinglistService.fetchData(this.id).subscribe((data: any) => {
+        console.log('old data received : ' + JSON.stringify(data));
+        if (data) {
+          this.id = data.id;
+          this.cartedItems = data.cart ? data.cart : [];
+          this.pendingItems = data.pending ? data.pending : [];
+        }
+      });
+
+    } else {
+      this.shoppinglistService.fetchData(undefined).subscribe((data: any) => {
+        console.log('new data received : ' + JSON.stringify(data));
+        this.router.navigateByUrl('/home/' + data.id);
+        console.log('navigate to new route');
+      });
+    }
   }
 
   add(): void {
