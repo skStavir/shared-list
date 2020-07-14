@@ -4,13 +4,10 @@ import {ItemsComponent} from './items/items.component';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: '/home', pathMatch: 'full'
+    path: '', component: ItemsComponent
   },
   {
-    path: 'home', component: ItemsComponent
-  },
-  {
-    path: 'home/:id', component: ItemsComponent
+    path: ':id', component: ItemsComponent
   }
 ];
 
