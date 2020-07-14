@@ -1,8 +1,8 @@
 const AWS = require("aws-sdk");
 
 
-AWS.config.update({region: 'ap-south-1'});
-const dynamoDb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
+AWS.config.update({ region: 'ap-south-1' });
+const dynamoDb = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
 
 const params = {
   TableName: 'shoppinglist',
@@ -25,7 +25,7 @@ function buildInitialShoppingList(id) {
 }
 
 function writeCallBack() {
-  return function (err, data) {
+  return function(err, data) {
     if (err) {
       console.log("Error in initializing data", err);
     }
@@ -33,7 +33,7 @@ function writeCallBack() {
 }
 
 function readCallBack() {
-  return function (err, data) {
+  return function(err, data) {
     if (err) {
       console.log('Error reading from database');
     }
@@ -44,11 +44,16 @@ function buildSuccessPayload(shoppinglist) {
   return {
     'statusCode': 200,
     'body': shoppinglist,
-    'isBase64Encoded': false
+    'isBase64Encoded': false,
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+    }
   };
 }
 
-exports.handler = async (event) => {
+exports.handler = async(event) => {
   let id;
 
   if (typeof event.pathParameters != 'undefined' && event.pathParameters) {
@@ -60,7 +65,7 @@ exports.handler = async (event) => {
     //TODO use uuid
     id = generateId();
     let newParams = buildInitialShoppingList(id);
-    console.log('initializing database with generated id: ' +id);
+    console.log('initializing database with generated id: ' + id);
     await dynamoDb.put(newParams, writeCallBack()).promise();
   }
 
@@ -73,4 +78,3 @@ exports.handler = async (event) => {
   //TODO build failure payloads
   return buildSuccessPayload(JSON.stringify(shoppinglist.Item));
 };
-

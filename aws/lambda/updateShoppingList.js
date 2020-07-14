@@ -1,13 +1,11 @@
 const AWS = require("aws-sdk");
 
-
 AWS.config.update({ region: 'ap-south-1' });
 const dynamoDb = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
 
 const params = {
   TableName: 'shoppinglist',
 };
-
 
 function writeCallBack() {
   return function(err, data) {
@@ -29,7 +27,12 @@ function buildSuccessPayload(shoppinglist) {
   return {
     'statusCode': 200,
     'body': shoppinglist,
-    'isBase64Encoded': false
+    'isBase64Encoded': false,
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT"
+    }
   };
 }
 
@@ -44,7 +47,12 @@ exports.handler = async(event) => {
     return {
       'statuCode': 400,
       'body': 'Invalid payload ' + JSON.stringify(event),
-      'isBase64Encoded': false
+      'isBase64Encoded': false,
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT"
+      }
     }
   }
   else {
@@ -53,7 +61,12 @@ exports.handler = async(event) => {
       return {
         'statuCode': 400,
         'body': 'Invalid payload, if of the entry is missing',
-        'isBase64Encoded': false
+        'isBase64Encoded': false,
+        headers: {
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT"
+        }
       }
     }
   }
