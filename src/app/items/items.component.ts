@@ -16,8 +16,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   cartedItems = [];
   interval: number;
   syncInProgress = false;
-  // serverUrl = 'http://localhost:4200?id=';
-  serverUrl = 'https://quickshoppinglist.com?id=';
+  serverUrl = 'http://localhost:4200?id=';
+  // serverUrl = 'https://quickshoppinglist.com?id=';
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
@@ -56,18 +56,21 @@ export class ItemsComponent implements OnInit, OnDestroy {
       return;
     }
     this.pendingItems.push(this.newItem);
+    this.pendingItems.sort((val1, val2) => val1.localeCompare(val2));
     this.syncData();
     this.resetInput();
   }
 
   cart(item): void {
     this.cartedItems.push(item);
+    this.cartedItems.sort((val1, val2) => val1.localeCompare(val2));
     this.removeItemFromPending(item);
     this.syncData();
   }
 
   pending(item): void {
     this.pendingItems.push(item);
+    this.pendingItems.sort((val1, val2) => val1.localeCompare(val2));
     this.removeItemFromCarted(item);
     this.syncData();
   }
