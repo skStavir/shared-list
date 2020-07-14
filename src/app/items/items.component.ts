@@ -15,6 +15,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   pendingItems = [];
   cartedItems = [];
   interval: number;
+  syncInProgress = false;
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
@@ -97,6 +98,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   private reloadData(): void {
+    if (this.syncInProgress) {
+      return;
+    }
     console.log('reloading data from server');
     this.shoppingListService.fetchData(this.id).subscribe((data: any) => {
       console.log('shopping list from server : ' + JSON.stringify(data));
@@ -105,10 +109,12 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   private syncData(): void {
+    this.syncInProgress = true;
     console.log('syncing updated data to server');
     this.shoppingListService.updateData(this.id, this.pendingItems, this.cartedItems).subscribe((data: any) => {
       console.log('shopping list from server : ' + JSON.stringify(data));
       this.updateDataFromServer(data);
+      this.syncInProgress = false;
     });
   }
 
