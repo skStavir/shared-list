@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTable} from '@angular/material/table';
-import {ShoppinglistService} from './shoppinglist.service';
+import {ShoppingListService} from './shopping-list.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -19,7 +19,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
 
-  constructor(private shoppinglistService: ShoppinglistService, private route: ActivatedRoute, private router: Router) {
+  constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute, private router: Router) {
     this.newItem = '';
     this.setDefaultPlaceholder();
   }
@@ -31,20 +31,18 @@ export class ItemsComponent implements OnInit, OnDestroy {
     });
 
     if (this.id) {
-      console.log('loading data for id : ' + this.id);
-      this.shoppinglistService.fetchData(this.id).subscribe((data: any) => {
-        console.log('old data received : ' + JSON.stringify(data));
+      console.log('loading data of list id : ' + this.id);
+      this.shoppingListService.fetchData(this.id).subscribe((data: any) => {
+        console.log('shopping list from server : ' + JSON.stringify(data));
         this.updateDataFromServer(data);
-        this.interval = setInterval(() => {
-          this.reloadData();
-        }, 10000);
+        this.enabledReload();
       });
 
     } else {
-      this.shoppinglistService.fetchData(undefined).subscribe((data: any) => {
-        console.log('new data received : ' + JSON.stringify(data));
+      this.shoppingListService.fetchData(undefined).subscribe((data: any) => {
+        console.log('created a shopping list : ' + JSON.stringify(data));
+        console.log('navigating to new shopping list');
         this.router.navigateByUrl('/home/' + data.id);
-        console.log('navigate to new route');
       });
     }
   }
@@ -55,25 +53,20 @@ export class ItemsComponent implements OnInit, OnDestroy {
       return;
     }
     this.pendingItems.push(this.newItem);
-    this.resetInput();
     this.syncData();
-    this.pendingTable.renderRows();
+    this.resetInput();
   }
 
   cart(item): void {
     this.cartedItems.push(item);
     this.removeItemFromPending(item);
     this.syncData();
-    this.pendingTable.renderRows();
-    this.cartTable.renderRows();
   }
 
   pending(item): void {
     this.pendingItems.push(item);
     this.removeItemFromCarted(item);
     this.syncData();
-    this.pendingTable.renderRows();
-    this.cartTable.renderRows();
   }
 
   remove(item): void {
@@ -81,7 +74,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
     if (index > -1) {
       this.pendingItems.splice(index, 1);
       this.syncData();
-      this.pendingTable.renderRows();
     }
   }
 
@@ -90,8 +82,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.pendingItems = [];
     this.cartedItems = [];
     this.syncData();
-    this.pendingTable.renderRows();
-    this.cartTable.renderRows();
   }
 
   ngOnDestroy(): void {
@@ -100,11 +90,25 @@ export class ItemsComponent implements OnInit, OnDestroy {
     }
   }
 
+  private enabledReload(): void {
+    this.interval = setInterval(() => {
+      this.reloadData();
+    }, 10000);
+  }
+
   private reloadData(): void {
-    console.log('reloading data');
-    this.shoppinglistService.fetchData(this.id).subscribe((dataIn: any) => {
-      console.log('old data received : ' + JSON.stringify(dataIn));
-      this.updateDataFromServer(dataIn);
+    console.log('reloading data from server');
+    this.shoppingListService.fetchData(this.id).subscribe((data: any) => {
+      console.log('shopping list from server : ' + JSON.stringify(data));
+      this.updateDataFromServer(data);
+    });
+  }
+
+  private syncData(): void {
+    console.log('syncing updated data to server');
+    this.shoppingListService.updateData(this.id, this.pendingItems, this.cartedItems).subscribe((data: any) => {
+      console.log('shopping list from server : ' + JSON.stringify(data));
+      this.updateDataFromServer(data);
     });
   }
 
@@ -113,6 +117,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
       this.id = data.id;
       this.cartedItems = data.cart ? data.cart : [];
       this.pendingItems = data.pending ? data.pending : [];
+      this.pendingTable.renderRows();
+      this.cartTable.renderRows();
     }
   }
 
@@ -139,10 +145,5 @@ export class ItemsComponent implements OnInit, OnDestroy {
     }
   }
 
-  private syncData(): void {
-    this.shoppinglistService.updateData(this.id, this.pendingItems, this.cartedItems).subscribe((data: any) => {
-      console.log('old data received : ' + JSON.stringify(data));
-      this.updateDataFromServer(data);
-    });
-  }
+
 }

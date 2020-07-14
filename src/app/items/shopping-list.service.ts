@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ShoppinglistService {
+export class ShoppingListService {
 
   private SERVER_URL = 'https://api.quickshoppinglist.com';
 
