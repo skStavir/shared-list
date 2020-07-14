@@ -33,11 +33,7 @@ export class ItemsComponent implements OnInit {
       console.log('loading data for id : ' + this.id);
       this.shoppinglistService.fetchData(this.id).subscribe((data: any) => {
         console.log('old data received : ' + JSON.stringify(data));
-        if (data) {
-          this.id = data.id;
-          this.cartedItems = data.cart ? data.cart : [];
-          this.pendingItems = data.pending ? data.pending : [];
-        }
+        this.updateDataFromServer(data);
       });
 
     } else {
@@ -49,6 +45,14 @@ export class ItemsComponent implements OnInit {
     }
   }
 
+  private updateDataFromServer(data: any): void {
+    if (data) {
+      this.id = data.id;
+      this.cartedItems = data.cart ? data.cart : [];
+      this.pendingItems = data.pending ? data.pending : [];
+    }
+  }
+
   add(): void {
     if (this.newItem.trim() === '') {
       this.inputPlaceHolder = 'Please enter a valid item';
@@ -56,12 +60,14 @@ export class ItemsComponent implements OnInit {
     }
     this.pendingItems.push(this.newItem);
     this.resetInput();
+    this.syncData();
     this.pendingTable.renderRows();
   }
 
   cart(item): void {
     this.cartedItems.push(item);
     this.removeItemFromPending(item);
+    this.syncData();
     this.pendingTable.renderRows();
     this.cartTable.renderRows();
   }
@@ -69,6 +75,7 @@ export class ItemsComponent implements OnInit {
   pending(item): void {
     this.pendingItems.push(item);
     this.removeItemFromCarted(item);
+    this.syncData();
     this.pendingTable.renderRows();
     this.cartTable.renderRows();
   }
@@ -77,6 +84,7 @@ export class ItemsComponent implements OnInit {
     const index = this.pendingItems.indexOf(item, 0);
     if (index > -1) {
       this.pendingItems.splice(index, 1);
+      this.syncData();
       this.pendingTable.renderRows();
     }
   }
@@ -85,6 +93,7 @@ export class ItemsComponent implements OnInit {
     alert('Thank you for using Quick shopping list. See you again');
     this.pendingItems = [];
     this.cartedItems = [];
+    this.syncData();
     this.pendingTable.renderRows();
     this.cartTable.renderRows();
   }
@@ -110,5 +119,12 @@ export class ItemsComponent implements OnInit {
     if (index > -1) {
       this.cartedItems.splice(index, 1);
     }
+  }
+
+  private syncData(): void{
+    this.shoppinglistService.updateData(this.id, this.pendingItems, this.cartedItems).subscribe((data: any) => {
+      console.log('old data received : ' + JSON.stringify(data));
+      this.updateDataFromServer(data);
+    });
   }
 }

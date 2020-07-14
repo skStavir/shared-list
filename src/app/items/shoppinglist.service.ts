@@ -20,5 +20,11 @@ export class ShoppinglistService {
     }
 
   }
+
+  public updateData(id, pendingItems, cartedItems) {
+
+    return this.httpClient.put(`${this.SERVER_URL}`, {id: id, pending: pendingItems, cart: cartedItems});
+
+  }
 }
 
