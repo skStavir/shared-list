@@ -16,6 +16,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   cartedItems = [];
   interval: number;
   syncInProgress = false;
+  // serverUrl = 'http://localhost:4200?id=';
+  serverUrl = 'https://quickshoppinglist.com?id=';
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
@@ -26,7 +28,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       this.id = params.id;
       console.log('id from url: ' + this.id);
     });
@@ -43,7 +45,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
       this.shoppingListService.fetchData(undefined).subscribe((data: any) => {
         console.log('created a shopping list : ' + JSON.stringify(data));
         console.log('navigating to new shopping list');
-        this.router.navigateByUrl('' + data.id);
+        window.location.href = this.serverUrl + data.id;
       });
     }
   }

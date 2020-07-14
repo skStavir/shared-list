@@ -5,9 +5,6 @@ import {ItemsComponent} from './items/items.component';
 const routes: Routes = [
   {
     path: '', component: ItemsComponent
-  },
-  {
-    path: ':id', component: ItemsComponent
   }
 ];
 
