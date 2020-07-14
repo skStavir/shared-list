@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ShoppingListService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public fetchData(id) {
+  public fetchData(id): Observable<object> {
     console.log(`fetching data by id: ${id}`);
     if (id === undefined) {
       return this.httpClient.get(`${this.SERVER_URL}`);
@@ -21,9 +22,9 @@ export class ShoppingListService {
 
   }
 
-  public updateData(id, pendingItems, cartedItems) {
+  public updateData(id, pendingItems, cartedItems): Observable<object> {
 
-    return this.httpClient.put(`${this.SERVER_URL}`, {id: id, pending: pendingItems, cart: cartedItems});
+    return this.httpClient.put(`${this.SERVER_URL}`, {id, pending: pendingItems, cart: cartedItems});
 
   }
 }

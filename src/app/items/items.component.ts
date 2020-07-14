@@ -99,6 +99,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   private reloadData(): void {
     if (this.syncInProgress) {
+      console.log('skipping reload since sync is in progress');
       return;
     }
     console.log('reloading data from server');
