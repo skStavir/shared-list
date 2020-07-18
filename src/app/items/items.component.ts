@@ -16,8 +16,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   cartedItems = [];
   interval: number;
   syncInProgress = false;
-  serverUrl = 'http://localhost:4200?id=';
-  // serverUrl = 'https://quickshoppinglist.com?id=';
+  // serverUrl = 'http://localhost:4200?id=';
+  serverUrl = 'https://quickshoppinglist.com?id=';
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
@@ -57,6 +57,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     }
     this.pendingItems.push(this.newItem);
     this.pendingItems.sort((val1, val2) => val1.localeCompare(val2));
+    this.pendingTable.renderRows();
     this.syncData();
     this.resetInput();
   }
@@ -65,6 +66,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.cartedItems.push(item);
     this.cartedItems.sort((val1, val2) => val1.localeCompare(val2));
     this.removeItemFromPending(item);
+    this.pendingTable.renderRows();
+    this.cartTable.renderRows();
     this.syncData();
   }
 
@@ -72,6 +75,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.pendingItems.push(item);
     this.pendingItems.sort((val1, val2) => val1.localeCompare(val2));
     this.removeItemFromCarted(item);
+    this.pendingTable.renderRows();
+    this.cartTable.renderRows();
     this.syncData();
   }
 
@@ -79,6 +84,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     const index = this.pendingItems.indexOf(item, 0);
     if (index > -1) {
       this.pendingItems.splice(index, 1);
+      this.pendingTable.renderRows();
       this.syncData();
     }
   }
@@ -87,6 +93,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
     alert('Thank you for using Quick shopping list. See you again');
     this.pendingItems = [];
     this.cartedItems = [];
+    this.pendingTable.renderRows();
+    this.cartTable.renderRows();
     this.syncData();
   }
 
@@ -156,6 +164,5 @@ export class ItemsComponent implements OnInit, OnDestroy {
       this.cartedItems.splice(index, 1);
     }
   }
-
 
 }
