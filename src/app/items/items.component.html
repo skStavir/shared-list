@@ -4,6 +4,9 @@
   <button aria-label="Example icon-button with share icon" class="example-icon" mat-icon-button>
     <mat-icon>share</mat-icon>
   </button>
+  <button aria-label="Example icon-button with share icon" class="example-icon" mat-icon-button>
+    <mat-icon>settings</mat-icon>
+  </button>
 </mat-toolbar>
 
 <table #inputTable="matTable" [dataSource]="[1]" class="mat-elevation-z8" mat-table>
@@ -21,7 +24,6 @@
         <input (keydown.enter)="add()" [(ngModel)]="newItem" matInput name="newItemInput"/>
       </mat-form-field>
     </td>
-
   </ng-container>
 
   <ng-container matColumnDef="add">
