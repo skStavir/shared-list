@@ -29,10 +29,6 @@
 </table>
 
 
-<mat-divider></mat-divider>
-
-<h3 matSubheader>My shopping list</h3>
-
 <div *ngIf="pendingItems.length === 0 && cartedItems.length === 0" class="mat-body-2">You are yet to add an item to your
   shopping list.
 </div>
@@ -74,7 +70,7 @@
 
 <mat-divider></mat-divider>
 
-<h3 matSubheader>My Cart (already picked items)</h3>
+<h3 matSubheader>My Cart - already picked items</h3>
 
 <div *ngIf="cartedItems.length ===0" class="mat-body-2">You are yet to pick up an item.</div>
 
@@ -118,6 +114,7 @@
 </div>
 <mat-divider></mat-divider>
 <h4 class="info" matSubheader>Your data is auto saved. Save or bookmark the browser url (<a
-  href="{{serverUrl}}{{id}}">{{serverUrl}}{{id}}</a>) to reopen the shopping list later. You may also share this url with
+  href="{{serverUrl}}{{id}}">{{serverUrl}}{{id}}</a>) to reopen the shopping list later. You may also share this url
+  with
   family to manage the shopping list.</h4>
 
