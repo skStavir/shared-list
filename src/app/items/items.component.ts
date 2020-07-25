@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTable} from '@angular/material/table';
 import {ShoppingListService} from './shopping-list.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {ShareDialogComponent} from '../share-dialog/share-dialog.component';
 
 @Component({
   selector: 'app-items',
@@ -22,7 +24,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
 
-  constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute, private router: Router) {
+  constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute, private router: Router,
+              private dialog: MatDialog) {
     this.newItem = '';
     this.setDefaultPlaceholder();
   }
@@ -102,6 +105,11 @@ export class ItemsComponent implements OnInit, OnDestroy {
     if (this.interval) {
       clearInterval(this.interval);
     }
+  }
+
+  shareDialog(): void {
+    const shareDialog = this.dialog.open(ShareDialogComponent,
+      {data: {shareUrl: this.serverUrl + this.id, appUrl: this.serverUrl}});
   }
 
   private enabledReload(): void {

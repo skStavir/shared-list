@@ -16,11 +16,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {HttpClientModule} from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
+import {ShareDialogComponent} from './share-dialog/share-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ItemsComponent
+    ItemsComponent,
+    ShareDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +39,13 @@ import {MatIconModule} from '@angular/material/icon';
     MatToolbarModule,
     MatTooltipModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
+  entryComponents: [
+    ShareDialogComponent
+  ],
+
   providers: [],
   bootstrap: [AppComponent]
 })

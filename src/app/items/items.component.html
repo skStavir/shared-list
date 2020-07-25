@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <span>Quick Shopping List</span>
   <span class="toolbar-spacer"></span>
-  <button aria-label="Example icon-button with share icon" class="example-icon" mat-icon-button>
+  <button (click)="shareDialog()" aria-label="Example icon-button with share icon" class="example-icon" mat-icon-button>
     <mat-icon>share</mat-icon>
   </button>
   <button aria-label="Example icon-button with share icon" class="example-icon" mat-icon-button>
@@ -121,8 +121,5 @@
   </button>
 </div>
 <mat-divider></mat-divider>
-<h4 class="info" matSubheader>Your data is auto saved. Save or bookmark the browser url (<a
-  href="{{serverUrl}}{{id}}">{{serverUrl}}{{id}}</a>) to reopen the shopping list later. You may also share this url
-  with
-  family to manage the shopping list.</h4>
+<!--<h4 class="info" matSubheader>Your data is auto saved.</h4>-->
 
