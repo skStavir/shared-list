@@ -1,4 +1,10 @@
-<mat-toolbar color="primary">Quick Shopping List</mat-toolbar>
+<mat-toolbar color="primary">
+  <span>Quick Shopping List</span>
+  <span class="toolbar-spacer"></span>
+  <button aria-label="Example icon-button with share icon" class="example-icon" mat-icon-button>
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
 
 <table #inputTable="matTable" [dataSource]="[1]" class="mat-elevation-z8" mat-table>
 
