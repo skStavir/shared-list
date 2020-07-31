@@ -4,7 +4,7 @@ node{
         git poll: false, url: 'https://github.com/santhoshkkk/quick-shopping-list.git'
 
         stage "build"
-        sh label: '', script: 'ng build --prod'
+        sh label: '', script: 'sudo npm install --save-dev @angular-devkit/build-angular && ng build --prod'
 
         stage "deployToS3"
         dir('dist/quick-shopping-list/') {
