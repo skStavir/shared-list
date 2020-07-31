@@ -1,0 +1,22 @@
+node{
+    try{
+        stage "checkout"
+        git poll: false, url: 'https://github.com/santhoshkkk/quick-shopping-list.git'
+
+        stage "build"
+        sh label: '', script: 'ng build --prod'
+
+        stage "deployToS3"
+        dir('dist/quick-shopping-list/') {
+            sh label: '', script: 'aws s3 sync . s3://quickshoppinglist.com'
+        }
+
+        stage "invalidateCloudFront"
+        sh label: '', script: 'aws cloudfront create-invalidation --distribution-id EZ23Q27PVMHMO --paths "/*" > invalidationresponse && cat invalidationresponse'
+        sh label: '', script: 'invalidationId=`cat invalidationresponse |  grep "Id" | cut -d ":" -f2| sed "s/,//g" | sed "s/\\"//g"` && command=`echo aws cloudfront wait invalidation-completed --distribution-id EZ23Q27PVMHMO --id $invalidationId` && $command'
+    } catch (e) {
+        // if any exception occurs, mark the build as failed
+        currentBuild.result = 'FAILURE'
+        throw e
+    }
+}
