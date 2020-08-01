@@ -1,4 +1,5 @@
 # QuickShoppingList
+Manage your shopping list.Collaborate with family. No login, no tracking
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
