@@ -25,12 +25,13 @@ export class ItemsComponent implements OnInit, OnDestroy {
   pendingItems = [];
   categorizedPendingItems = [];
   cartedItems = [];
-  categorizedCarteditems = [];
+  categorizedCartedItems = [];
+
   interval: number;
   syncInProgress = false;
 
-  serverUrl = 'http://localhost:4200?id=';
-  // serverUrl = 'https://quickshoppinglist.com?id=';
+  // serverUrl = 'http://localhost:4200?id=';
+  serverUrl = 'https://quickshoppinglist.com?id=';
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
@@ -74,50 +75,48 @@ export class ItemsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.addItemToCategorizedList(this.newItem, this.getItemCategory(this.newItem), this.categorizedPendingItems);
-    this.reloadPendingItemsFromCategorizedPendingItemsList();
+    this.pendingItems.push(this.newItem);
 
-    this.pendingTable.renderRows();
+    this.arrangePending();
+
     this.syncData('ADD', this.newItem);
     this.resetInput();
   }
 
   cart(item): void {
-    this.addItemToCategorizedList(item, this.getItemCategory(item), this.categorizedCarteditems);
-    this.reloadCartFromCategorizedCartedItemsList();
+    const index = this.pendingItems.indexOf(item);
+    this.pendingItems.splice(index, 1);
+    this.cartedItems.push(item);
 
-    this.removeItemFromPending(item);
-    this.pendingTable.renderRows();
-    this.cartTable.renderRows();
+    this.arrangePending();
+    this.arrangeCart();
+
     this.syncData('PICKED', item);
   }
 
   pending(item): void {
-    this.addItemToCategorizedList(item, this.getItemCategory(item), this.categorizedPendingItems);
-    this.reloadPendingItemsFromCategorizedPendingItemsList();
-    this.removeItemFromCarted(item);
-    this.pendingTable.renderRows();
-    this.cartTable.renderRows();
+    const index = this.cartedItems.indexOf(item);
+    this.cartedItems.splice(index, 1);
+    this.pendingItems.push(item);
+
+    this.arrangePending();
+    this.arrangeCart();
+
     this.syncData('DROPPED', item);
   }
 
   remove(item): void {
-    const category = this.getItemCategory(item);
-    const index = this.categorizedPendingItems[category].indexOf(item, 0);
-    if (index > -1) {
-      this.categorizedPendingItems[category].splice(index, 1);
-      this.reloadPendingItemsFromCategorizedPendingItemsList();
-      this.pendingTable.renderRows();
-      this.syncData('REMOVE', item);
-    }
+    const index = this.pendingItems.indexOf(item);
+    this.pendingItems.splice(index, 1);
+
+    this.arrangePending();
+
+    this.syncData('REMOVE', item);
   }
 
   doneShopping(): void {
     alert('Thank you for using Quick shopping list. See you again');
-    this.pendingItems = [];
-    this.cartedItems = [];
-    this.pendingTable.renderRows();
-    this.cartTable.renderRows();
+    // TODO revisit
     window.location.href = this.serverUrl;
   }
 
@@ -131,40 +130,18 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.dialog.open(ShareDialogComponent, {data: {shareUrl: this.serverUrl + this.id, appUrl: this.serverUrl}});
   }
 
-  private reloadPendingItemsFromCategorizedPendingItemsList(): void {
-    this.pendingItems = [];
-    Object.keys(this.categorizedPendingItems).forEach((categoryEntry) => {
-      console.log(`categoryEntry:${categoryEntry}`);
-      this.categorizedPendingItems[categoryEntry].forEach(categoryItem => this.pendingItems.push(categoryItem));
-    });
-  }
-
-  private addItemToCategorizedList(item, category, categorizedList): void {
-    if (!categorizedList[category]) {
-      categorizedList[category] = [];
-    }
-    categorizedList[category].push(item);
-    console.log(`addItemToCategorizedList: category: ${category} categorizedList: ${categorizedList}`);
-  }
-
-  private getItemCategory(item): string {
-    let category = this.itemCategories[item];
-    if (!category) {
-      category = 'other';
-    }
-    console.log(`category:${category}`);
-    return category;
-  }
-
   private thisLoadItemsAndCategories(): void {
-    this.shoppingListService.getCategorizedItems().subscribe((data: any) => {
-      data.forEach((entry) => {
-        entry.items.forEach((item) => {
+    this.shoppingListService.getCategorizedItems().subscribe((categoyItems: any) => {
+      categoyItems.forEach((itemList) => {
+        itemList.items.forEach((item) => {
           this.itemsMasterList.push(item);
-          this.itemCategories[item] = entry.category;
+          this.itemCategories[item] = itemList.category;
         });
       });
+
       this.setUpAutocompleteFilter();
+      this.arrangePending();
+      this.arrangeCart();
     });
   }
 
@@ -178,14 +155,13 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.itemsMasterList.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   private enabledReload(): void {
     this.interval = setInterval(() => {
       this.reloadData();
-    }, 100000);
+    }, 10000);
   }
 
   private reloadData(): void {
@@ -212,17 +188,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
   private updateDataFromServer(data: any): void {
     if (data) {
       this.id = data.id;
-      data.pending.forEach((pending) => {
-        this.addItemToCategorizedList(pending, this.getItemCategory(pending), this.categorizedPendingItems);
-      });
-      this.reloadPendingItemsFromCategorizedPendingItemsList();
-      this.pendingTable.renderRows();
-
-      data.cart.forEach((carted) => {
-        this.addItemToCategorizedList(carted, this.getItemCategory(carted), this.categorizedCarteditems);
-      });
-      this.reloadCartFromCategorizedCartedItemsList();
-      this.cartTable.renderRows();
+      this.pendingItems = data.pending;
+      this.cartedItems = data.cart;
+      this.arrangePending();
     }
   }
 
@@ -236,36 +204,54 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.inputPlaceHolder = 'Enter an Item';
   }
 
-  private removeItemFromPending(item): void {
-    const category = this.getItemCategory(item);
-    const itemCategoryList = this.categorizedPendingItems[category];
-
-    const index = itemCategoryList.indexOf(item, 0);
-    if (index > -1) {
-      itemCategoryList.splice(index, 1);
-    }
-
-    this.reloadPendingItemsFromCategorizedPendingItemsList();
-  }
-
-  private removeItemFromCarted(item): void {
-    const category = this.getItemCategory(item);
-    console.log(`removeItemFromCarted - category: ${category}`);
-    const itemCategoryList = this.categorizedCarteditems[category];
-    console.log(`removeItemFromCarted - itemCategoryList: ${itemCategoryList}`);
-    const index = itemCategoryList.indexOf(item, 0);
-    if (index > -1) {
-      itemCategoryList.splice(index, 1);
-    }
-
-    this.reloadCartFromCategorizedCartedItemsList();
-  }
-
   private reloadCartFromCategorizedCartedItemsList(): void {
     this.cartedItems = [];
-    Object.keys(this.categorizedCarteditems).forEach((categoryEntry) => {
+    Object.keys(this.categorizedCartedItems).forEach((categoryEntry) => {
       console.log(`categoryEntry:${categoryEntry}`);
-      this.categorizedCarteditems[categoryEntry].forEach(categoryItem => this.cartedItems.push(categoryItem));
+      this.categorizedCartedItems[categoryEntry].forEach(categoryItem => this.cartedItems.push(categoryItem));
     });
   }
+
+  private reloadPendingItemsFromCategorizedPendingItemsList(): void {
+    this.pendingItems = [];
+    Object.keys(this.categorizedPendingItems).forEach((categoryEntry) => {
+      this.categorizedPendingItems[categoryEntry].forEach(categoryItem => this.pendingItems.push(categoryItem));
+    });
+  }
+
+  private addItemToCategorizedList(item, category, categorizedList): void {
+    if (!categorizedList[category]) {
+      categorizedList[category] = [];
+    }
+    categorizedList[category].push(item);
+  }
+
+  private getItemCategory(item): string {
+    let category = this.itemCategories[item];
+    if (!category) {
+      category = 'other';
+    }
+    console.log(`category:${category}`);
+    return category;
+  }
+
+  private arrangePending(): void {
+    this.categorizedPendingItems = [];
+    this.pendingItems.forEach((pending) => {
+      this.addItemToCategorizedList(pending, this.getItemCategory(pending), this.categorizedPendingItems);
+    });
+    this.reloadPendingItemsFromCategorizedPendingItemsList();
+    this.pendingTable.renderRows();
+  }
+
+  private arrangeCart(): void {
+    this.categorizedCartedItems = [];
+    this.cartedItems.forEach((carted) => {
+      this.addItemToCategorizedList(carted, this.getItemCategory(carted), this.categorizedCartedItems);
+    });
+    this.reloadCartFromCategorizedCartedItemsList();
+    this.cartTable.renderRows();
+  }
+
+  // TODO retain the order of items in categorized list
 }
