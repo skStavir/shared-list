@@ -207,7 +207,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   private reloadCartFromCategorizedCartedItemsList(): void {
     this.cartedItems = [];
     Object.keys(this.categorizedCartedItems).forEach((categoryEntry) => {
-      console.log(`categoryEntry:${categoryEntry}`);
+      this.categorizedCartedItems[categoryEntry].sort();
       this.categorizedCartedItems[categoryEntry].forEach(categoryItem => this.cartedItems.push(categoryItem));
     });
   }
@@ -215,6 +215,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   private reloadPendingItemsFromCategorizedPendingItemsList(): void {
     this.pendingItems = [];
     Object.keys(this.categorizedPendingItems).forEach((categoryEntry) => {
+      this.categorizedPendingItems[categoryEntry].sort();
       this.categorizedPendingItems[categoryEntry].forEach(categoryItem => this.pendingItems.push(categoryItem));
     });
   }
