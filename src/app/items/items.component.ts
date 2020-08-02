@@ -17,10 +17,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
   id: string;
   newItem: string;
   inputPlaceHolder: string;
-  itemsMasterList = ['rice', 'atta', 'wheat', 'millets', 'maida', 'raagi', 'rava', 'banana', 'apple', 'orange', 'fruits', 'papaya', 'guava', 'grapes', 'pineapple', 'vegetables', 'cucumber', 'carrot', 'beetroot', 'beans', 'pudina', 'mint', 'curry leaves', 'cauliflower', 'tomato', 'potato', 'ginger', 'garlic', 'pen', 'pencil', 'book', 'paper', 'snacks', 'chips', 'icecream', 'bread', 'cake', 'house holds', 'brush', 'paste', 'soap', 'blade', 'trimmer', 'sanitizer', 'hand wash'
-  ];
+  itemsMasterList = [];
   filteredItems: Observable<string[]>;
   itemInputControl = new FormControl();
+  itemCategories = new Map();
 
   pendingItems = [];
   cartedItems = [];
@@ -61,11 +61,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
       });
     }
 
-    this.filteredItems = this.itemInputControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
+    this.thisLoadItemsAndCategories();
+
   }
 
   add(): void {
@@ -123,8 +120,28 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   shareDialog(): void {
-    const shareDialog = this.dialog.open(ShareDialogComponent,
-      {data: {shareUrl: this.serverUrl + this.id, appUrl: this.serverUrl}});
+    this.dialog.open(ShareDialogComponent, {data: {shareUrl: this.serverUrl + this.id, appUrl: this.serverUrl}});
+  }
+
+  private thisLoadItemsAndCategories(): void {
+    this.shoppingListService.getCategorizedItems().subscribe((data: any) => {
+      data.forEach((entry) => {
+        entry.items.forEach((item) => {
+          this.itemsMasterList.push(item);
+          this.itemCategories.set(item, entry.category);
+        });
+      });
+      console.log(`itemCategories : ${JSON.stringify(this.itemCategories)}`);
+      this.setUpAutocompleteFilter();
+    });
+  }
+
+  private setUpAutocompleteFilter(): void {
+    this.filteredItems = this.itemInputControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
   }
 
   private _filter(value: string): string[] {

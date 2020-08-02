@@ -1,0 +1,88 @@
+[
+  {
+    "category": "vegetables",
+    "items": [
+      "vegetables",
+      "cucumber",
+      "carrot",
+      "beetroot",
+      "beans",
+      "pudina",
+      "mint",
+      "curry leaves",
+      "cauliflower",
+      "tomato",
+      "potato",
+      "ginger",
+      "garlic"
+    ]
+  },
+  {
+    "category": "fruits",
+    "items": [
+      "fruits",
+      "banana",
+      "apple",
+      "orange",
+      "fruits",
+      "papaya",
+      "guava",
+      "grapes",
+      "pineapple"
+    ]
+  },
+  {
+    "category": "personalCare",
+    "items": [
+      "house holds",
+      "brush",
+      "paste",
+      "soap",
+      "blade",
+      "trimmer",
+      "sanitizer",
+      "hand wash"
+    ]
+  },
+  {
+    "category": "education",
+    "items": [
+      "pen",
+      "pencil",
+      "book",
+      "paper"
+    ]
+  },
+  {
+    "category": "groceries",
+    "items": [
+      "rice",
+      "atta",
+      "wheat",
+      "millets",
+      "maida",
+      "raagi",
+      "rava"
+    ]
+  },
+  {
+    "category": "snacks",
+    "items": [
+      "snacks",
+      "chips",
+      "icecream",
+      "bread",
+      "cake"
+    ]
+  },
+  {
+    "category": "dairy",
+    "items": [
+      "milk",
+      "curd",
+      "cheese",
+      "paneer",
+      "cream"
+    ]
+  }
+]
