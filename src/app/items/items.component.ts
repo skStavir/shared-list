@@ -174,6 +174,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   private resetInput(): void {
     this.newItem = '';
     this.setDefaultPlaceholder();
+    this.itemInputControl.setValue('');
   }
 
   private setDefaultPlaceholder(): void {

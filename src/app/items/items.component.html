@@ -16,7 +16,7 @@
     <td *matCellDef="let item" mat-cell></td>
   </ng-container>
 
-  <mat-autocomplete #auto="matAutocomplete">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="add()">
     <mat-option *ngFor="let option of filteredItems | async" [value]="option">
       {{option}}
     </mat-option>
