@@ -61,7 +61,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.pendingItems.push(this.newItem);
     this.pendingItems.sort((val1, val2) => val1.localeCompare(val2));
     this.pendingTable.renderRows();
-    this.syncData();
+    this.syncData('ADD', this.newItem);
     this.resetInput();
   }
 
@@ -71,7 +71,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.removeItemFromPending(item);
     this.pendingTable.renderRows();
     this.cartTable.renderRows();
-    this.syncData();
+    this.syncData('PICKED', item);
   }
 
   pending(item): void {
@@ -80,7 +80,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.removeItemFromCarted(item);
     this.pendingTable.renderRows();
     this.cartTable.renderRows();
-    this.syncData();
+    this.syncData('DROPPED', item);
   }
 
   remove(item): void {
@@ -88,7 +88,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     if (index > -1) {
       this.pendingItems.splice(index, 1);
       this.pendingTable.renderRows();
-      this.syncData();
+      this.syncData('REMOVE', item);
     }
   }
 
@@ -98,7 +98,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.cartedItems = [];
     this.pendingTable.renderRows();
     this.cartTable.renderRows();
-    this.syncData();
+    window.location.href = this.serverUrl;
   }
 
   ngOnDestroy(): void {
@@ -130,10 +130,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private syncData(): void {
+  private syncData(action, item): void {
     this.syncInProgress = true;
-    console.log('syncing updated data to server');
-    this.shoppingListService.updateData(this.id, this.pendingItems, this.cartedItems).subscribe((data: any) => {
+    console.log(`syncing updated data to server action:${action} item:${item}`);
+    this.shoppingListService.updateData(this.id, action, item).subscribe((data: any) => {
       console.log('shopping list from server : ' + JSON.stringify(data));
       this.updateDataFromServer(data);
       this.syncInProgress = false;

@@ -22,9 +22,9 @@ export class ShoppingListService {
 
   }
 
-  public updateData(id, pendingItems, cartedItems): Observable<object> {
+  public updateData(id, action, item): Observable<object> {
 
-    return this.httpClient.put(`${this.SERVER_URL}`, {id, pending: pendingItems, cart: cartedItems});
+    return this.httpClient.put(`${this.SERVER_URL}`, {id, action, item});
 
   }
 }
