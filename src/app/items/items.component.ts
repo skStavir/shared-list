@@ -231,7 +231,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
     if (!category) {
       category = 'other';
     }
-    console.log(`category:${category}`);
     return category;
   }
 
