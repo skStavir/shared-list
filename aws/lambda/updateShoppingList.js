@@ -72,30 +72,33 @@ exports.handler = async (event) => {
       'id': payload.id
     }
   };
-  let lastVersion = await dynamoDb.get(getParams, readCallBack()).promise();
-  console.log(`lastVersion ${JSON.stringify(lastVersion)}`);
+  let shoppingList = await dynamoDb.get(getParams, readCallBack()).promise();
+  console.log(`lastVersion ${JSON.stringify(shoppingList)}`);
   if (payload.action == 'ADD') {
-    lastVersion.Item.pending.push(payload.item)
+    if (!shoppingList.Item.pending.includes(payload.item)) {
+      shoppingList.Item.pending.push(payload.item)
+    }
   } else if (payload.action == 'REMOVE') {
-    lastVersion.Item.pending = removeItemFromArray(lastVersion.Item.pending, payload.item);
+    shoppingList.Item.pending = removeItemFromArray(shoppingList.Item.pending, payload.item);
   } else if (payload.action == 'PICKED') {
-    lastVersion.Item.pending = removeItemFromArray(lastVersion.Item.pending, payload.item);
-    lastVersion.Item.cart.push(payload.item);
+    shoppingList.Item.pending = removeItemFromArray(shoppingList.Item.pending, payload.item);
+    shoppingList.Item.cart.push(payload.item);
   } else if (payload.action == 'DROPPED') {
-    lastVersion.Item.cart = removeItemFromArray(lastVersion.Item.cart, payload.item);
-    lastVersion.Item.pending.push(payload.item);
+    shoppingList.Item.cart = removeItemFromArray(shoppingList.Item.cart, payload.item);
+    shoppingList.Item.pending.push(payload.item);
   } else {
     return buildBadRequestResponse(`Invalid payload, action ${payload.action} is not supported`);
   }
-  console.log(`version after update ${JSON.stringify(lastVersion)}`);
+  console.log(`version after update ${JSON.stringify(shoppingList)}`);
 
+  shoppingList.updateTime = Date.now();
   //TODO exception handling
   let writeParams = {
     TableName: 'shoppinglist',
-    Item: lastVersion.Item
+    Item: shoppingList.Item
   };
   await dynamoDb.put(writeParams, writeCallBack()).promise();
 
   //TODO build failure payloads
-  return buildSuccessPayload(JSON.stringify(lastVersion.Item));
+  return buildSuccessPayload(JSON.stringify(shoppingList.Item));
 };
