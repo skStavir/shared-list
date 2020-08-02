@@ -20,15 +20,17 @@ export class ItemsComponent implements OnInit, OnDestroy {
   itemsMasterList = [];
   filteredItems: Observable<string[]>;
   itemInputControl = new FormControl();
-  itemCategories = new Map();
+  itemCategories = {};
 
   pendingItems = [];
+  categorizedPendingItems = [];
   cartedItems = [];
+  categorizedCarteditems = [];
   interval: number;
   syncInProgress = false;
 
-  // serverUrl = 'http://localhost:4200?id=';
-  serverUrl = 'https://quickshoppinglist.com?id=';
+  serverUrl = 'http://localhost:4200?id=';
+  // serverUrl = 'https://quickshoppinglist.com?id=';
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
@@ -40,6 +42,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.thisLoadItemsAndCategories();
+
     this.route.queryParams.subscribe(params => {
       this.id = params.id;
       console.log('id from url: ' + this.id);
@@ -61,8 +66,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
       });
     }
 
-    this.thisLoadItemsAndCategories();
-
   }
 
   add(): void {
@@ -70,16 +73,19 @@ export class ItemsComponent implements OnInit, OnDestroy {
       this.inputPlaceHolder = 'Please enter a valid item';
       return;
     }
-    this.pendingItems.push(this.newItem);
-    this.pendingItems.sort((val1, val2) => val1.localeCompare(val2));
+
+    this.addItemToCategorizedList(this.newItem, this.getItemCategory(this.newItem), this.categorizedPendingItems);
+    this.reloadPendingItemsFromCategorizedPendingItemsList();
+
     this.pendingTable.renderRows();
     this.syncData('ADD', this.newItem);
     this.resetInput();
   }
 
   cart(item): void {
-    this.cartedItems.push(item);
-    this.cartedItems.sort((val1, val2) => val1.localeCompare(val2));
+    this.addItemToCategorizedList(item, this.getItemCategory(item), this.categorizedCarteditems);
+    this.reloadCartFromCategorizedCartedItemsList();
+
     this.removeItemFromPending(item);
     this.pendingTable.renderRows();
     this.cartTable.renderRows();
@@ -87,8 +93,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   pending(item): void {
-    this.pendingItems.push(item);
-    this.pendingItems.sort((val1, val2) => val1.localeCompare(val2));
+    this.addItemToCategorizedList(item, this.getItemCategory(item), this.categorizedPendingItems);
+    this.reloadPendingItemsFromCategorizedPendingItemsList();
     this.removeItemFromCarted(item);
     this.pendingTable.renderRows();
     this.cartTable.renderRows();
@@ -96,9 +102,11 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   remove(item): void {
-    const index = this.pendingItems.indexOf(item, 0);
+    const category = this.getItemCategory(item);
+    const index = this.categorizedPendingItems[category].indexOf(item, 0);
     if (index > -1) {
-      this.pendingItems.splice(index, 1);
+      this.categorizedPendingItems[category].splice(index, 1);
+      this.reloadPendingItemsFromCategorizedPendingItemsList();
       this.pendingTable.renderRows();
       this.syncData('REMOVE', item);
     }
@@ -123,15 +131,39 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.dialog.open(ShareDialogComponent, {data: {shareUrl: this.serverUrl + this.id, appUrl: this.serverUrl}});
   }
 
+  private reloadPendingItemsFromCategorizedPendingItemsList(): void {
+    this.pendingItems = [];
+    Object.keys(this.categorizedPendingItems).forEach((categoryEntry) => {
+      console.log(`categoryEntry:${categoryEntry}`);
+      this.categorizedPendingItems[categoryEntry].forEach(categoryItem => this.pendingItems.push(categoryItem));
+    });
+  }
+
+  private addItemToCategorizedList(item, category, categorizedList): void {
+    if (!categorizedList[category]) {
+      categorizedList[category] = [];
+    }
+    categorizedList[category].push(item);
+    console.log(`addItemToCategorizedList: category: ${category} categorizedList: ${categorizedList}`);
+  }
+
+  private getItemCategory(item): string {
+    let category = this.itemCategories[item];
+    if (!category) {
+      category = 'other';
+    }
+    console.log(`category:${category}`);
+    return category;
+  }
+
   private thisLoadItemsAndCategories(): void {
     this.shoppingListService.getCategorizedItems().subscribe((data: any) => {
       data.forEach((entry) => {
         entry.items.forEach((item) => {
           this.itemsMasterList.push(item);
-          this.itemCategories.set(item, entry.category);
+          this.itemCategories[item] = entry.category;
         });
       });
-      console.log(`itemCategories : ${JSON.stringify(this.itemCategories)}`);
       this.setUpAutocompleteFilter();
     });
   }
@@ -153,7 +185,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   private enabledReload(): void {
     this.interval = setInterval(() => {
       this.reloadData();
-    }, 10000);
+    }, 100000);
   }
 
   private reloadData(): void {
@@ -173,7 +205,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
     console.log(`syncing updated data to server action:${action} item:${item}`);
     this.shoppingListService.updateData(this.id, action, item).subscribe((data: any) => {
       console.log('shopping list from server : ' + JSON.stringify(data));
-      this.updateDataFromServer(data);
       this.syncInProgress = false;
     });
   }
@@ -181,9 +212,16 @@ export class ItemsComponent implements OnInit, OnDestroy {
   private updateDataFromServer(data: any): void {
     if (data) {
       this.id = data.id;
-      this.cartedItems = data.cart ? data.cart : [];
-      this.pendingItems = data.pending ? data.pending : [];
+      data.pending.forEach((pending) => {
+        this.addItemToCategorizedList(pending, this.getItemCategory(pending), this.categorizedPendingItems);
+      });
+      this.reloadPendingItemsFromCategorizedPendingItemsList();
       this.pendingTable.renderRows();
+
+      data.cart.forEach((carted) => {
+        this.addItemToCategorizedList(carted, this.getItemCategory(carted), this.categorizedCarteditems);
+      });
+      this.reloadCartFromCategorizedCartedItemsList();
       this.cartTable.renderRows();
     }
   }
@@ -199,17 +237,35 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   private removeItemFromPending(item): void {
-    const index = this.pendingItems.indexOf(item, 0);
+    const category = this.getItemCategory(item);
+    const itemCategoryList = this.categorizedPendingItems[category];
+
+    const index = itemCategoryList.indexOf(item, 0);
     if (index > -1) {
-      this.pendingItems.splice(index, 1);
+      itemCategoryList.splice(index, 1);
     }
+
+    this.reloadPendingItemsFromCategorizedPendingItemsList();
   }
 
   private removeItemFromCarted(item): void {
-    const index = this.cartedItems.indexOf(item, 0);
+    const category = this.getItemCategory(item);
+    console.log(`removeItemFromCarted - category: ${category}`);
+    const itemCategoryList = this.categorizedCarteditems[category];
+    console.log(`removeItemFromCarted - itemCategoryList: ${itemCategoryList}`);
+    const index = itemCategoryList.indexOf(item, 0);
     if (index > -1) {
-      this.cartedItems.splice(index, 1);
+      itemCategoryList.splice(index, 1);
     }
+
+    this.reloadCartFromCategorizedCartedItemsList();
   }
 
+  private reloadCartFromCategorizedCartedItemsList(): void {
+    this.cartedItems = [];
+    Object.keys(this.categorizedCarteditems).forEach((categoryEntry) => {
+      console.log(`categoryEntry:${categoryEntry}`);
+      this.categorizedCarteditems[categoryEntry].forEach(categoryItem => this.cartedItems.push(categoryItem));
+    });
+  }
 }
