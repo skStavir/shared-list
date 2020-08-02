@@ -3,10 +3,6 @@ const AWS = require("aws-sdk");
 AWS.config.update({region: 'ap-south-1'});
 const dynamoDb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
-const params = {
-  TableName: 'shoppinglist',
-};
-
 const HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Allow-Origin": "*",
@@ -20,6 +16,8 @@ function writeCallBack() {
     }
   };
 }
+
+//Payload format {id:24, operation:ADD/REMOVE/PICKED/DROPPED item:itemname}
 
 function readCallBack() {
   return function (err, data) {
@@ -38,44 +36,58 @@ function buildSuccessPayload(shoppinglist) {
   };
 }
 
+function buildBadRequestResponse(message) {
+  return {
+    'statusCode': 400,
+    'body': message,
+    'isBase64Encoded': false,
+    headers: HEADERS
+  };
+}
+
+function removeItemFromArray(array, itemToRemove) {
+  return array.filter(item => item != itemToRemove)
+}
+
 exports.handler = async (event) => {
 
   console.log("body: " + event.body);
 
   let payload;
   if (typeof event.body === 'undefined' || !event.body) {
-
-    return {
-      'statuCode': 400,
-      'body': 'Invalid payload ' + JSON.stringify(event),
-      'isBase64Encoded': false,
-      headers: HEADERS
-    }
+    return buildBadRequestResponse('Invalid payload ' + JSON.stringify(event))
   } else {
     payload = JSON.parse(event.body);
     if (!payload.id) {
-      return {
-        'statuCode': 400,
-        'body': 'Invalid payload, if of the entry is missing',
-        'isBase64Encoded': false,
-        headers: HEADERS
-      }
+      return buildBadRequestResponse('Invalid payload, if of the entry is missing')
+    } else if (!payload.action) {
+      return buildBadRequestResponse('Invalid payload, action is missing')
     }
   }
+
+  //Get the current version
+  const getParams = {
+    TableName: 'shoppinglist',
+    Key: {
+      'id': payload.id
+    }
+  };
+  let lastVersion = await dynamoDb.get(getParams, readCallBack()).promise();
+  console.log(`lastVersion ${JSON.stringify(lastVersion)}`);
+  if (payload.action == 'ADD') {
+    lastVersion.Item.pending.push(payload.item)
+  } else if (payload.action == 'REMOVE') {
+    lastVersion.Item.pending = removeItemFromArray(lastVersion.Item.pending, payload.item);
+  }
+  console.log(`version after update ${JSON.stringify(lastVersion)}`);
 
   //TODO exception handling
   let writeParams = {
     TableName: 'shoppinglist',
-    Item: payload
+    Item: lastVersion.Item
   };
   await dynamoDb.put(writeParams, writeCallBack()).promise();
 
-  params.Key = {
-    'id': payload.id
-  };
-  let shoppinglist = await dynamoDb.get(params, readCallBack()).promise();
-
-  console.log('Data after update' + JSON.stringify(shoppinglist.Item));
   //TODO build failure payloads
-  return buildSuccessPayload(JSON.stringify(shoppinglist.Item));
+  return buildSuccessPayload(JSON.stringify(lastVersion.Item));
 };
