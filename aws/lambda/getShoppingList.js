@@ -12,6 +12,12 @@ function generateId() {
   return Math.random().toString().substring(2);
 }
 
+const HEADERS = {
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+}
+
 function buildInitialShoppingList(id) {
   let newParams = {
     TableName: 'shoppinglist',
@@ -45,11 +51,7 @@ function buildSuccessPayload(shoppinglist) {
     'statusCode': 200,
     'body': shoppinglist,
     'isBase64Encoded': false,
-    headers: {
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-    }
+    headers: HEADERS
   };
 }
 
