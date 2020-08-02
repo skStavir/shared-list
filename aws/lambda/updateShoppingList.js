@@ -78,6 +78,14 @@ exports.handler = async (event) => {
     lastVersion.Item.pending.push(payload.item)
   } else if (payload.action == 'REMOVE') {
     lastVersion.Item.pending = removeItemFromArray(lastVersion.Item.pending, payload.item);
+  } else if (payload.action == 'PICKED') {
+    lastVersion.Item.pending = removeItemFromArray(lastVersion.Item.pending, payload.item);
+    lastVersion.Item.cart.push(payload.item);
+  } else if (payload.action == 'DROPPED') {
+    lastVersion.Item.cart = removeItemFromArray(lastVersion.Item.cart, payload.item);
+    lastVersion.Item.pending.push(payload.item);
+  } else {
+    return buildBadRequestResponse(`Invalid payload, action ${payload.action} is not supported`);
   }
   console.log(`version after update ${JSON.stringify(lastVersion)}`);
 
