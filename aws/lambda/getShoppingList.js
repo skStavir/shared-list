@@ -1,8 +1,7 @@
 const AWS = require("aws-sdk");
 
-
-AWS.config.update({ region: 'ap-south-1' });
-const dynamoDb = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
+AWS.config.update({region: 'ap-south-1'});
+const dynamoDb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
 const params = {
   TableName: 'shoppinglist',
@@ -16,7 +15,7 @@ const HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-}
+};
 
 function buildInitialShoppingList(id) {
   let newParams = {
@@ -31,7 +30,7 @@ function buildInitialShoppingList(id) {
 }
 
 function writeCallBack() {
-  return function(err, data) {
+  return function (err, data) {
     if (err) {
       console.log("Error in initializing data", err);
     }
@@ -39,7 +38,7 @@ function writeCallBack() {
 }
 
 function readCallBack() {
-  return function(err, data) {
+  return function (err, data) {
     if (err) {
       console.log('Error reading from database');
     }
@@ -55,7 +54,7 @@ function buildSuccessPayload(shoppinglist) {
   };
 }
 
-exports.handler = async(event) => {
+exports.handler = async (event) => {
   let id;
 
   if (typeof event.pathParameters != 'undefined' && event.pathParameters) {

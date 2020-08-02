@@ -1,8 +1,7 @@
 const AWS = require("aws-sdk");
 
-
-AWS.config.update({ region: 'ap-south-1' });
-const dynamoDb = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
+AWS.config.update({region: 'ap-south-1'});
+const dynamoDb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
 const params = {
   TableName: 'shoppinglist',
@@ -12,11 +11,10 @@ const HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT"
-}
-
+};
 
 function writeCallBack() {
-  return function(err, data) {
+  return function (err, data) {
     if (err) {
       console.log("Error in updating data", err);
     }
@@ -24,7 +22,7 @@ function writeCallBack() {
 }
 
 function readCallBack() {
-  return function(err, data) {
+  return function (err, data) {
     if (err) {
       console.log('Error');
     }
@@ -40,10 +38,9 @@ function buildSuccessPayload(shoppinglist) {
   };
 }
 
-exports.handler = async(event) => {
+exports.handler = async (event) => {
 
   console.log("body: " + event.body);
-
 
   let payload;
   if (typeof event.body === 'undefined' || !event.body) {
@@ -54,8 +51,7 @@ exports.handler = async(event) => {
       'isBase64Encoded': false,
       headers: HEADERS
     }
-  }
-  else {
+  } else {
     payload = JSON.parse(event.body);
     if (!payload.id) {
       return {
@@ -71,9 +67,8 @@ exports.handler = async(event) => {
   let writeParams = {
     TableName: 'shoppinglist',
     Item: payload
-  }
-  let updateResponse = await dynamoDb.put(writeParams, writeCallBack()).promise();
-
+  };
+  await dynamoDb.put(writeParams, writeCallBack()).promise();
 
   params.Key = {
     'id': payload.id
