@@ -4,6 +4,9 @@ import {ShoppingListService} from './shopping-list.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ShareDialogComponent} from '../share-dialog/share-dialog.component';
+import {Observable} from 'rxjs';
+import {FormControl} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-items',
@@ -14,12 +17,18 @@ export class ItemsComponent implements OnInit, OnDestroy {
   id: string;
   newItem: string;
   inputPlaceHolder: string;
+  itemsMasterList = ['rice', 'atta', 'wheat', 'millets', 'maida', 'raagi', 'rava', 'banana', 'apple', 'orange', 'fruits', 'papaya', 'guava', 'grapes', 'pineapple', 'vegetables', 'cucumber', 'carrot', 'beetroot', 'beans', 'pudina', 'mint', 'curry leaves', 'cauliflower', 'tomato', 'potato', 'ginger', 'garlic', 'pen', 'pencil', 'book', 'paper', 'snacks', 'chips', 'icecream', 'bread', 'cake', 'house holds', 'brush', 'paste', 'soap', 'blade', 'trimmer', 'sanitizer', 'hand wash'
+  ];
+  filteredItems: Observable<string[]>;
+  itemInputControl = new FormControl();
+
   pendingItems = [];
   cartedItems = [];
   interval: number;
   syncInProgress = false;
-  // serverUrl = 'http://localhost:4200?id=';
-  serverUrl = 'https://quickshoppinglist.com?id=';
+
+  serverUrl = 'http://localhost:4200?id=';
+  // serverUrl = 'https://quickshoppinglist.com?id=';
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
@@ -51,6 +60,12 @@ export class ItemsComponent implements OnInit, OnDestroy {
         window.location.href = this.serverUrl + data.id;
       });
     }
+
+    this.filteredItems = this.itemInputControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
   }
 
   add(): void {
@@ -110,6 +125,12 @@ export class ItemsComponent implements OnInit, OnDestroy {
   shareDialog(): void {
     const shareDialog = this.dialog.open(ShareDialogComponent,
       {data: {shareUrl: this.serverUrl + this.id, appUrl: this.serverUrl}});
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.itemsMasterList.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   private enabledReload(): void {

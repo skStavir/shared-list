@@ -16,12 +16,19 @@
     <td *matCellDef="let item" mat-cell></td>
   </ng-container>
 
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredItems | async" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+
   <ng-container matColumnDef="itemInput">
     <th *matHeaderCellDef mat-header-cell> itemInput</th>
     <td *matCellDef="let item" class="mat-body-2" mat-cell>
       <mat-form-field>
         <mat-label>{{inputPlaceHolder}}</mat-label>
-        <input (keydown.enter)="add()" [(ngModel)]="newItem" matInput name="newItemInput"/>
+        <input (keydown.enter)="add()" [(ngModel)]="newItem" [formControl]="itemInputControl" [matAutocomplete]="auto"
+               matInput name="newItemInput"/>
       </mat-form-field>
     </td>
   </ng-container>
