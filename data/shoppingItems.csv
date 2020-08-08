@@ -1,0 +1,487 @@
+Beverage,Brandy
+Beverage,Coffee
+Beverage,Coffee Powder
+Beverage,Cola
+Beverage,Fruit Juice
+Beverage,Jin
+Beverage,Juice
+Beverage,Rum
+Beverage,Tea
+Beverage,Tea Powder
+Beverage,Vodka
+Beverage,Water
+Beverage,Wine
+Beverage,Whisky
+Breads,Artisan Bread
+Breads,Bread
+Breads,Brown Bread
+Breads,Bun
+Breads,Burger Bun
+Breads,Chicken Puffs
+Breads,Chocolate Cake
+Breads,Chocolate Donut
+Breads,Croissant
+Breads,Donut
+Breads,Egg Puffs
+Breads,Fruit Cake
+Breads,Garlic Bread
+Breads,Marble Cake
+Breads,Milk Bread
+Breads,Moon Fills
+Breads,Muffins
+Breads,Multi Grain Bread
+Breads,Pastry
+Breads,Pav
+Breads,Pita Bread
+Breads,Pizza Base
+Breads,Plum Cake
+Breads,Puffs
+Breads,Sandwich Bread
+Breads,Sweet Bun
+Breads,Tea Cake
+Breads,Vegetable Puffs
+Breads,Wheat Bread
+Dairy,Butter
+Dairy,ButterMilk
+Dairy,Cheese
+Dairy,Condensed Milk
+Dairy,Cream
+Dairy,Curd
+Dairy,Lassi
+Dairy,Milk
+Dairy,Milk Powder
+Dairy,Milk Shake
+Dairy,Paneer
+Dairy,Skimmed Milk
+Dairy,Toned Milk
+DalPulse,Arhar
+DalPulse,Bajra
+DalPulse,Bajra Wild
+DalPulse,Barnyard Millet
+DalPulse,Bellar
+DalPulse,Bellar Dal
+DalPulse,Bengal Gram
+DalPulse,Brown Chana
+DalPulse,BuckWheat
+DalPulse,Chana
+DalPulse,CousCous
+DalPulse,Finger Millet
+DalPulse,Fried Gram
+DalPulse,Gram
+DalPulse,Green Moong
+DalPulse,Green Peas
+DalPulse,Ground nut
+DalPulse,Harissa
+DalPulse,Horse Gram
+DalPulse,Jowar
+DalPulse,Kabuli Chana
+DalPulse,Kadala
+DalPulse,Kappalandi
+DalPulse,Kashmiri Rajma
+DalPulse,Kodo
+DalPulse,Kodo Millet
+DalPulse,Kulthi
+DalPulse,Little Millet
+DalPulse,Lobia
+DalPulse,Lobia white
+DalPulse,Masoor
+DalPulse,Masoor Dal
+DalPulse,Matar
+DalPulse,Matki
+DalPulse,Millet
+DalPulse,Moong
+DalPulse,Moong Dal
+DalPulse,Moth
+DalPulse,Pearl Millet
+DalPulse,Popcorn seeds
+DalPulse,Quinoa
+DalPulse,Ragi
+DalPulse,Rajma
+DalPulse,Rajma Chitra
+DalPulse,Rajma Red
+DalPulse,Red Lobia
+DalPulse,Soya
+DalPulse,Toor
+DalPulse,Toor Dal
+DalPulse,Tur
+DalPulse,Urad
+DalPulse,Urad Dal
+DalPulse,Varagu
+DessertsCookie,Biscuit
+DessertsCookie,Chikki
+DessertsCookie,Chocobar
+DessertsCookie,Chocolate Cookie
+DessertsCookie,Cookies
+DessertsCookie,Corneto
+DessertsCookie,Cream cone
+DessertsCookie,Ellunda
+DessertsCookie,Ice cream
+DessertsCookie,Kappalandi Muttai
+DessertsCookie,Kulfi
+DessertsCookie,Rusk
+DessertsCookie,Salt Biscuit
+DessertsCookie,Seasme Ball
+DessertsCookie,Tutti Fruitti
+Dry Fruit,Abjosh
+Dry Fruit,Akhrot
+Dry Fruit,Almond
+Dry Fruit,Anardana
+Dry Fruit,Anjeer
+Dry Fruit,Apricot
+Dry Fruit,Apricots
+Dry Fruit,Badam
+Dry Fruit,Brazilian Nuts
+Dry Fruit,Cashew
+Dry Fruit,Chia Seeds
+Dry Fruit,Dates
+Dry Fruit,Dates Deseeded
+Dry Fruit,Dates Syrup
+Dry Fruit,Dried Blueberries
+Dry Fruit,Dried Cranberries
+Dry Fruit,Dried Goji Berries
+Dry Fruit,Dried Kiwi
+Dry Fruit,Dried Pineapple
+Dry Fruit,Dry Grape
+Dry Fruit,Figs
+Dry Fruit,Flax Seeds
+Dry Fruit,Green Pumpkin Seeds
+Dry Fruit,Hazelnut
+Dry Fruit,Kaju
+Dry Fruit,Kasuvandi
+Dry Fruit,Khumani
+Dry Fruit,Kismis
+Dry Fruit,Mix Dry Fruits
+Dry Fruit,Munakka
+Dry Fruit,Nuts
+Dry Fruit,Pista
+Dry Fruit,Raisins
+Dry Fruit,Sabja Seeds
+Dry Fruit,Seasme Seeds
+Dry Fruit,Sunflower Seeds
+Dry Fruit,Tarbuj Seeds
+Dry Fruit,Unakka Munthiri
+Dry Fruit,Walnut
+Dry Fruit,Watermelon Seeds
+Flours,Appam Podi
+Flours,Atta
+Flours,Bansi Sooji
+Flours,Besan
+Flours,Broken Wheat
+Flours,Chemba Puttu Podi
+Flours,Chiroti Sooji
+Flours,Corn Flour
+Flours,Idli Sooji
+Flours,Jowar Flour
+Flours,Maida
+Flours,Mutligrain Atta
+Flours,Nachni Atta
+Flours,Puttu Podi
+Flours,Ragi Dosa Mix
+Flours,Ragi Flour
+Flours,Rava
+Flours,Rice Flour
+Flours,Roasted Sooji
+Flours,Samba Wheat
+Flours,Samba Wheat Broken
+Flours,Sharbati Atta
+Flours,Sooji
+Flours,Sprouted Ragi
+Flours,Wheat Daliya
+Flours,Wheat Puttu Podi
+Flowers,Chrysanthemums
+Flowers,Flowers
+Flowers,Jasmine
+Flowers,Lotus
+Flowers,Marigold
+Flowers,Rajnigandha
+Flowers,Roses
+Fruits,Apple
+Fruits,Avocado
+Fruits,Banana
+Fruits,Chikku
+Fruits,Dragon Fruit
+Fruits,Fruits
+Fruits,Grapes
+Fruits,Grapes green
+Fruits,Green Apple
+Fruits,Guava
+Fruits,Kadali
+Fruits,Kiwi
+Fruits,Mango
+Fruits,Mosambi
+Fruits,Muskmelon
+Fruits,Nendran
+Fruits,Orange
+Fruits,Papaya
+Fruits,Pazham
+Fruits,Pear
+Fruits,Pineapple
+Fruits,Plum
+Fruits,Pomegranate
+Fruits,Robusta
+Fruits,Sapota
+Fruits,Sugarcane
+Fruits,Sweet Tamarind
+Fruits,Tender Coconut
+Fruits,Watermelon
+Grains,Aval
+Grains,Avalakki
+Grains,Basmati Rice
+Grains,Bhog Rice
+Grains,Boiled Rice
+Grains,Boiled Sona Masoori
+Grains,Brown Rice
+Grains,Bullet Rice
+Grains,Chivda
+Grains,Dosa Rice
+Grains,Gobind Bhog Rice
+Grains,Idli Rice
+Grains,Jaya Rice
+Grains,Jeera Rice
+Grains,Jeeraga Samba Rice
+Grains,Kerala Red Rice
+Grains,Kerala Rice
+Grains,Kerala White Rice
+Grains,Kolam Rice
+Grains,Matta Rice
+Grains,Organic Brown Rice
+Grains,Palakkadan Matta Rice
+Grains,Poha
+Grains,Ponni Rice
+Grains,Raw Sona Masoori
+Grains,Rice
+Grains,Sabudana
+Grains,Sona Masoori
+Grains,Surti Kolam Rice
+Grains,Thick Poha
+Grains,Vadi Matta Rice
+Grains,Wheat
+Masala,Ajwain
+Masala,Amchoor
+Masala,Amchoor Powder
+Masala,Ananas Flower
+Masala,Asafoetida
+Masala,Asafoetida Powder
+Masala,Bay Leaf
+Masala,Biriyani Masala
+Masala,Bisibelebath Powder
+Masala,Black Pepper
+Masala,Black Salt
+Masala,Cardamom
+Masala,Chat Masala
+Masala,Chikken Masala
+Masala,Chilli Powder
+Masala,Cinnamon
+Masala,Cinnamon Powder
+Masala,Coconut Powder
+Masala,Cooking Soda
+Masala,Coriander
+Masala,Coriander Powder
+Masala,Cumin
+Masala,Dalchini
+Masala,Dhania
+Masala,Elachi
+Masala,Elakka
+Masala,Fennel
+Masala,Fenugreek
+Masala,Garam Masala
+Masala,Ginger Garlic Paste
+Masala,Hing
+Masala,Hyderabadi Biriyan Masala
+Masala,Imli
+Masala,Irachi Masala
+Masala,Javitri
+Masala,Jayaphal
+Masala,Jeera
+Masala,Kala Namak
+Masala,Kalonji
+Masala,Karuvappatta
+Masala,Kashmiri Chilli Powder
+Masala,Kasoori Methi
+Masala,Kesar
+Masala,Khus Khus
+Masala,Lemon Rice Powder
+Masala,Mace
+Masala,Mace Whole
+Masala,Makhana
+Masala,Manjal
+Masala,Manjal podi
+Masala,Masala,Masala
+Masala,Methi
+Masala,Mustard
+Masala,Mutton Masala
+Masala,Nutmeg
+Masala,Oregano
+Masala,Pav Bhaji Masala
+Masala,Pepper
+Masala,Perum Jeerakam
+Masala,Phool Makhana
+Masala,Piri Piri, Multipurpose Spice Mix
+Masala,Posta Dana
+Masala,Puliogare Powder
+Masala,Rai
+Masala,Rasam Powder
+Masala,Red Chilli
+Masala,Sabji Masala
+Masala,Saffron
+Masala,Sambar Powder
+Masala,Saunf
+Masala,Spice Mix
+Masala,Star Anise
+Masala,Star Flower
+Masala,Tamarind
+Masala,Tej Patta
+Masala,Til
+Masala,Til White
+Masala,Till White
+Masala,Tomato Rice Powder
+Masala,Turmeric
+Masala,Turmeric Powder
+Masala,Uluva
+Masala,Vangibath Powder
+Masala,Vayana ila
+Masala,Vegetable Masala
+NonVeg,Beef
+NonVeg,Chicken
+NonVeg,Duck
+NonVeg,Egg
+NonVeg,Fish
+NonVeg,Irachi
+NonVeg,Konju
+NonVeg,Kozhi
+NonVeg,Lamb
+NonVeg,Meat
+NonVeg,Meen
+NonVeg,Mutton
+NonVeg,Prawns
+NonVeg,Rabbit
+Oil,Coconut Oil
+Oil,Cow Ghee
+Oil,Enna
+Oil,Ghee
+Oil,Gingelly Oil
+Oil,Groundnut Oil
+Oil,Hydrogenated Vegetable Oil
+Oil,Mustard Oil
+Oil,Olive Oil
+Oil,Olive Pomace Oil
+Oil,Palm Oil
+Oil,Pancha Thyla
+Oil,Plamolien Oil
+Oil,Pooja Oil
+Oil,Refined Sunflower Oil
+Oil,Rice Bran
+Oil,Rice Bran Oil
+Oil,Saflower Oil
+Oil,Seasme Oil
+Oil,Soyabean Oil
+Oil,Sunflower
+Oil,Sunflower oil
+Oil,Vanaspathi
+Oil,Vegetable Oil
+Oil,Velichenna
+Oil,Vilakkenna
+Oil,Virgin Coconut Oil
+ReadyToCook,Noodles
+ReadyToCook,Popcorn
+ReadyToCook,Soup
+SaltSugar,Brows Sugar
+SaltSugar,Diamond Sugar
+SaltSugar,Himalayan Pink Salt
+SaltSugar,Iodised Salt
+SaltSugar,Jaggeri
+SaltSugar,Jaggeri powder
+SaltSugar,Kalkandam
+SaltSugar,Pink Salt
+SaltSugar,Rock Salt
+SaltSugar,Salt
+SaltSugar,Salt Crystal
+SaltSugar,Salt Sprinkle
+SaltSugar,Sugar
+SaltSugar,Sugar Candi
+SaltSugar,Sweetner
+Vegetable,Amaranthus
+Vegetable,Amrutha Balli
+Vegetable,Arugula
+Vegetable,Ash Gourd
+Vegetable,Asparagus
+Vegetable,Banana
+Vegetable,Banana Leaf
+Vegetable,Banana Stem
+Vegetable,Banana flower
+Vegetable,Basale Leaf
+Vegetable,Beans
+Vegetable,Beetroot
+Vegetable,Betel Leaf
+Vegetable,Bitter Gourd
+Vegetable,Brinjal
+Vegetable,Broad Beans
+Vegetable,Broccoli
+Vegetable,Cabbage
+Vegetable,Capsicum
+Vegetable,Carrot
+Vegetable,Cauliflower
+Vegetable,Celery
+Vegetable,Channa Brown
+Vegetable,Chilli
+Vegetable,Chow Chow
+Vegetable,Cluster Beans
+Vegetable,Coccinia
+Vegetable,Coconut
+Vegetable,Colocasia
+Vegetable,Coriander Leaves
+Vegetable,Cowpea Beans
+Vegetable,Cucumber
+Vegetable,Curry Leaves
+Vegetable,Dill Leaves
+Vegetable,Drumstick
+Vegetable,Fennel
+Vegetable,Flower
+Vegetable,Garlic
+Vegetable,Ginger
+Vegetable,Gourd
+Vegetable,Gram
+Vegetable,Green Chilli
+Vegetable,Green Peas Fresh
+Vegetable,Groundnut Fresh
+Vegetable,Kappa
+Vegetable,Knol Khol
+Vegetable,Ladies Finger
+Vegetable,Leaf
+Vegetable,Leeks
+Vegetable,Lemon
+Vegetable,Lemon grass
+Vegetable,Lettuce
+Vegetable,Methi
+Vegetable,Mint Leaves
+Vegetable,Moringa
+Vegetable,Mushrooms
+Vegetable,Neem Giloy
+Vegetable,Onion
+Vegetable,Oregano
+Vegetable,Pak Choi
+Vegetable,Palak
+Vegetable,Papaya raw
+Vegetable,Parsley Leaves
+Vegetable,Parwal
+Vegetable,Potato
+Vegetable,Pumpkin
+Vegetable,Radish
+Vegetable,Radish - White
+Vegetable,Raw Banana
+Vegetable,Ridge Gourd
+Vegetable,Rocket
+Vegetable,Rosemary
+Vegetable,Sambhar Onion
+Vegetable,Snake Gourd
+Vegetable,Spinach
+Vegetable,Spring Onion
+Vegetable,Sprouts
+Vegetable,Sweet Corn
+Vegetable,Sweet Potato
+Vegetable,Tapioca
+Vegetable,Tinda
+Vegetable,Tomato
+Vegetable,Vegetable
+Vegetable,Yam
+Vegetable,Zucchini
