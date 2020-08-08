@@ -127,7 +127,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   shareDialog(): void {
-    this.dialog.open(ShareDialogComponent, {data: {shareUrl: this.serverUrl + this.id, appUrl: this.serverUrl}});
+    this.dialog.open(ShareDialogComponent, {data: {shareUrl: this.serverUrl + this.id, appUrl: this.serverUrl + '/welcome.html'}});
   }
 
   private thisLoadItemsAndCategories(): void {
