@@ -67,7 +67,7 @@
   <ng-container matColumnDef="gotIt">
     <th *matHeaderCellDef mat-header-cell> Picked</th>
     <td *matCellDef="let item" mat-cell>
-      <button (click)="cart(item)" color="success" mat-raised-button matTooltip="move item to the cart">picked</button>
+      <button (click)="cart(item)" color="success" mat-raised-button matTooltip="move item to the cart">pick</button>
     </td>
   </ng-container>
 
@@ -107,7 +107,7 @@
     <td *matCellDef="let item" mat-cell>
       <button (click)="pending(item)" color="primary" mat-raised-button
               matTooltip="move item back to the shopping list">
-        dropped
+        drop
       </button>
     </td>
   </ng-container>
