@@ -72,9 +72,13 @@ exports.handler = async (event) => {
       'id': payload.id
     }
   };
+
+  let updateTime = Date.now();
+
   let shoppingList = await dynamoDb.get(getParams, readCallBack()).promise();
-  console.log(`lastVersion ${JSON.stringify(shoppingList)}`);
+
   if (payload.action == 'ADD') {
+    console.log(`includes ${shoppingList.Item.pending.includes(payload.item)}`);
     if (!shoppingList.Item.pending.includes(payload.item)) {
       shoppingList.Item.pending.push(payload.item)
     }
@@ -89,10 +93,11 @@ exports.handler = async (event) => {
   } else {
     return buildBadRequestResponse(`Invalid payload, action ${payload.action} is not supported`);
   }
-  console.log(`version after update ${JSON.stringify(shoppingList)}`);
 
-  shoppingList.updateTime = Date.now();
+  shoppingList.updateTime = updateTime;
+
   //TODO exception handling
+  //TODO optimistic locking and retry
   let writeParams = {
     TableName: 'shoppinglist',
     Item: shoppingList.Item

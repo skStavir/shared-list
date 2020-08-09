@@ -210,7 +210,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.syncInProgress = true;
     console.log(`syncing updated data to server action:${action} item:${item}`);
     this.shoppingListService.updateData(this.id, action, item).subscribe((data: any) => {
-      console.log('shopping list from server : ' + JSON.stringify(data));
+      console.log('save response : ' + JSON.stringify(data));
       this.syncInProgress = false;
     });
   }
