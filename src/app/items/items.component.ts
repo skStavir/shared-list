@@ -135,6 +135,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
     location.href = 'mailto:support@onenzeros.in?subject=Quick Shopping List';
   }
 
+  about(): void {
+    location.href = 'https://quickshoppinglist.com/about.html';
+  }
+
   private thisLoadItemsAndCategories(): void {
     this.shoppingListService.getCategorizedItems().subscribe((categoyItems: any) => {
       categoyItems.forEach((itemList) => {
