@@ -130,6 +130,11 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.dialog.open(ShareDialogComponent, {data: {shareUrl: this.serverUrl + this.id, appUrl: this.serverUrl + '/welcome.html'}});
   }
 
+  // TODO retain the order of items in categorized list
+  mailTo(): void {
+    location.href = 'mailto:support@onenzeros.in?subject=Quick Shopping List';
+  }
+
   private thisLoadItemsAndCategories(): void {
     this.shoppingListService.getCategorizedItems().subscribe((categoyItems: any) => {
       categoyItems.forEach((itemList) => {
@@ -252,6 +257,4 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.reloadCartFromCategorizedCartedItemsList();
     this.cartTable.renderRows();
   }
-
-  // TODO retain the order of items in categorized list
 }

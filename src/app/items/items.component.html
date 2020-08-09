@@ -4,9 +4,14 @@
   <button (click)="shareDialog()" aria-label="Example icon-button with share icon" class="example-icon" mat-icon-button>
     <mat-icon>share</mat-icon>
   </button>
-  <button aria-label="Example icon-button with share icon" class="example-icon" mat-icon-button>
+  <button [matMenuTriggerFor]="settings" aria-label="Example icon-button with share icon" class="example-icon"
+          mat-icon-button>
     <mat-icon>settings</mat-icon>
   </button>
+  <mat-menu #settings="matMenu">
+    <button (click)="mailTo()" class="example-icon" mat-menu-item>Contact us</button>
+    <button class="example-icon" mat-menu-item>About</button>
+  </mat-menu>
 </mat-toolbar>
 
 <table #inputTable="matTable" [dataSource]="[1]" class="mat-elevation-z8" mat-table>
