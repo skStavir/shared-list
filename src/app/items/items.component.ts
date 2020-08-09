@@ -140,7 +140,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   help(): void {
-    location.href = 'https://youtube.com';
+    location.href = 'https://www.youtube.com/watch?v=nnIl8pf8oCc';
   }
 
   private thisLoadItemsAndCategories(): void {
