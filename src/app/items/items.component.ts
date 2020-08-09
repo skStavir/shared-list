@@ -149,10 +149,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
       this.ngNavigatorShareService.share({
         title: 'Quick Shopping List',
         text: 'Here is our shopping list. Manage items or use it for shopping.',
-        url: 'this.serverUrl + this.id'
+        url: `${this.serverUrl}${this.id}`
       }).then((val) => console.log('success'), (err) => {
         console.log('error');
-        this.shareDialog();
       });
 
     } catch (error) {
