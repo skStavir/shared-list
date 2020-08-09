@@ -64,7 +64,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
       this.shoppingListService.fetchData(undefined).subscribe((data: any) => {
         console.log('created a shopping list : ' + JSON.stringify(data));
         console.log('navigating to new shopping list');
-        window.location.href = this.serverUrl + data.id;
+        window.location.href = `${this.serverUrl}${data.id}`;
       });
     }
 
