@@ -1,6 +1,7 @@
 [
   {
-    "category": "vegetables",
+    "category": "Vegetable",
+    "order": 1,
     "items": [
       "Amaranthus",
       "Amrutha Balli",
@@ -92,6 +93,7 @@
   },
   {
     "category": "Fruits",
+    "order": 2,
     "items": [
       "Apple",
       "Avocado",
@@ -125,7 +127,8 @@
     ]
   },
   {
-    "category": "BeautyAndHygiene,",
+    "category": "BeautyAndHygiene",
+    "order": 18,
     "items": [
       "After Bath Gel",
       "After Shave",
@@ -230,16 +233,8 @@
     ]
   },
   {
-    "category": "education",
-    "items": [
-      "pen",
-      "pencil",
-      "book",
-      "paper"
-    ]
-  },
-  {
     "category": "Flours",
+    "order": 9,
     "items": [
       "Appam Podi",
       "Atta",
@@ -270,17 +265,8 @@
     ]
   },
   {
-    "category": "snacks",
-    "items": [
-      "snacks",
-      "chips",
-      "icecream",
-      "bread",
-      "cake"
-    ]
-  },
-  {
-    "category": "dairy",
+    "category": "Dairy",
+    "order": 5,
     "items": [
       "Butter",
       "ButterMilk",
@@ -298,7 +284,8 @@
     ]
   },
   {
-    "category": "Beverage",
+    "category": "Beverages",
+    "order": 6,
     "items": [
       "Brandy",
       "Coffee",
@@ -358,6 +345,7 @@
   },
   {
     "category": "Breads",
+    "order": 15,
     "items": [
       "Artisan Bread",
       "Bread",
@@ -392,6 +380,7 @@
   },
   {
     "category": "DalPulse",
+    "order": 10,
     "items": [
       "Arhar",
       "Bajra",
@@ -450,6 +439,7 @@
   },
   {
     "category": "DessertsCookie",
+    "order": 16,
     "items": [
       "Chocobar",
       "Chocolate Cookie",
@@ -461,6 +451,7 @@
   },
   {
     "category": "Dry Fruit",
+    "order": 4,
     "items": [
       "Abjosh",
       "Akhrot",
@@ -506,6 +497,7 @@
   },
   {
     "category": "Flowers",
+    "order": 3,
     "items": [
       "Chrysanthemums",
       "Flowers",
@@ -518,6 +510,7 @@
   },
   {
     "category": "Grains",
+    "order": 11,
     "items": [
       "Aval",
       "Avalakki",
@@ -556,6 +549,7 @@
   },
   {
     "category": "Masala",
+    "order": 14,
     "items": [
       "Ajwain",
       "Amchoor",
@@ -646,6 +640,7 @@
   },
   {
     "category": "NonVeg",
+    "order": 8,
     "items": [
       "Beef",
       "Chicken",
@@ -665,6 +660,7 @@
   },
   {
     "category": "Oil",
+    "order": 12,
     "items": [
       "Coconut Oil",
       "Cow Ghee",
@@ -696,15 +692,8 @@
     ]
   },
   {
-    "category": "ReadyToCook",
-    "items": [
-      "Noodles",
-      "Popcorn",
-      "Soup"
-    ]
-  },
-  {
     "category": "SaltSugar",
+    "order": 13,
     "items": [
       "Brows Sugar",
       "Diamond Sugar",
@@ -725,6 +714,7 @@
   },
   {
     "category": "SnackAndBranded",
+    "order": 17,
     "items": [
       "Achappam",
       "Aloo Bhujia",
@@ -855,6 +845,7 @@
   },
   {
     "category": "Frozen",
+    "order": 7,
     "items": [
       "Frozen Aloo Tikki",
       "Frozen Burger Patti",
@@ -875,6 +866,7 @@
   },
   {
     "category": "HouseHold",
+    "order": 19,
     "items": [
       "Agarbatti",
       "Air Freshener",
@@ -967,6 +959,7 @@
   },
   {
     "category": "Stationery",
+    "order": 20,
     "items": [
       "Alarm Clock",
       "Drawing Book",
@@ -1008,6 +1001,7 @@
   },
   {
     "category": "BabyCare",
+    "order": 21,
     "items": [
       "Babies Bib",
       "Baby Cotton Pads",

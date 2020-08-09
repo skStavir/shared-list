@@ -22,6 +22,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   filteredItems: Observable<string[]>;
   itemInputControl = new FormControl();
   itemCategories = {};
+  categoryOrder = {other: 99999};
 
   pendingItems = [];
   categorizedPendingItems = [];
@@ -31,8 +32,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   interval: number;
   syncInProgress = false;
 
-  // serverUrl = 'http://localhost:4200?id=';
-  serverUrl = 'https://quickshoppinglist.com?id=';
+  serverUrl = 'http://localhost:4200?id=';
+  // serverUrl = 'https://quickshoppinglist.com?id=';
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
@@ -167,8 +168,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
           this.itemsMasterList.push(item);
           this.itemCategories[item] = itemList.category;
         });
+        this.categoryOrder[itemList.category] = itemList.order;
       });
-
+      console.log('this.categoryOrder' + JSON.stringify(this.categoryOrder));
       this.setUpAutocompleteFilter();
       this.arrangePending();
       this.arrangeCart();
@@ -236,6 +238,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   private reloadCartFromCategorizedCartedItemsList(): void {
     this.cartedItems = [];
+    this.categorizedCartedItems.sort((first, second) => Number(this.categoryOrder[first]) - Number(this.categoryOrder[second]));
+    // TODO soring is mixed up
     Object.keys(this.categorizedCartedItems).forEach((categoryEntry) => {
       this.categorizedCartedItems[categoryEntry].sort();
       this.categorizedCartedItems[categoryEntry].forEach(categoryItem => this.cartedItems.push(categoryItem));
@@ -244,6 +248,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   private reloadPendingItemsFromCategorizedPendingItemsList(): void {
     this.pendingItems = [];
+    this.categorizedPendingItems.sort((first, second) => Number(this.categoryOrder[first]) - Number(this.categoryOrder[second]));
     Object.keys(this.categorizedPendingItems).forEach((categoryEntry) => {
       this.categorizedPendingItems[categoryEntry].sort();
       this.categorizedPendingItems[categoryEntry].forEach(categoryItem => this.pendingItems.push(categoryItem));
@@ -255,6 +260,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
       categorizedList[category] = [];
     }
     categorizedList[category].push(item);
+    console.log(`addItemToCategorizedList: ${JSON.stringify(categorizedList[category])}`);
   }
 
   private getItemCategory(item): string {
@@ -267,9 +273,12 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   private arrangePending(): void {
     this.categorizedPendingItems = [];
+    console.log(`categorizedPendingItems: ${JSON.stringify(this.categorizedPendingItems)}`);
     this.pendingItems.forEach((pending) => {
       this.addItemToCategorizedList(pending, this.getItemCategory(pending), this.categorizedPendingItems);
     });
+    console.log(`after adding categorizedPendingItems: ${JSON.stringify(this.categorizedPendingItems)}`);
+
     this.reloadPendingItemsFromCategorizedPendingItemsList();
     this.pendingTable.renderRows();
   }
