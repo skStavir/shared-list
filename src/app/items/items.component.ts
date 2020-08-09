@@ -7,6 +7,7 @@ import {ShareDialogComponent} from '../share-dialog/share-dialog.component';
 import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
+import {NgNavigatorShareService} from 'ng-navigator-share';
 
 @Component({
   selector: 'app-items',
@@ -37,7 +38,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   @ViewChild('cartTable') cartTable: MatTable<any>;
 
   constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute, private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog, private ngNavigatorShareService: NgNavigatorShareService) {
     this.newItem = '';
     this.setDefaultPlaceholder();
   }
@@ -141,6 +142,23 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   help(): void {
     location.href = 'https://www.youtube.com/watch?v=nnIl8pf8oCc';
+  }
+
+  share(): void {
+    try {
+      this.ngNavigatorShareService.share({
+        title: 'Quick Shopping List',
+        text: 'Here is our shopping list. Manage items or use it for shopping.',
+        url: 'this.serverUrl + this.id'
+      }).then((val) => console.log('success'), (err) => {
+        console.log('error');
+        this.shareDialog();
+      });
+
+    } catch (error) {
+      console.log('You shopping list is not shared, reason: ', error);
+
+    }
   }
 
   private thisLoadItemsAndCategories(): void {
