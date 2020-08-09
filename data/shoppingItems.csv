@@ -12,6 +12,46 @@ Beverage,Vodka
 Beverage,Water
 Beverage,Wine
 Beverage,Whisky
+Beverage,Soft Drink
+Beverage,Soda
+Beverage,Cocacola
+Beverage,Pepsi
+Beverage,Sprite
+Beverage,Maza
+Beverage,Paper Boat
+Beverage,Thumbs up
+Beverage,Monster
+Beverage,Red Bull
+Beverage,7 Up
+Beverage,Mirinda
+Beverage,Glucon D
+Beverage,Tang
+Beverage,Slice
+Beverage,Frooty
+Beverage,Fanta
+Beverage,Mountain Dew
+Beverage,Beer
+Beverage,Breezer
+Beverage,Mineral Water
+Beverage,Water Bottle
+Beverage,Horlicks
+Beverage,BournVita
+Beverage,Complan
+Beverage,Boost
+Beverage,Pedisure
+Beverage,Ensure
+Beverage,Badam Milk
+Beverage,Tropicana
+Beverage,Real
+Beverage,Coconut water
+Beverage,Soya Milk
+Beverage,Pulpi Orange Juice
+Beverage,Pulpi Grape Juice
+Beverage,Nimbooz
+Beverage,Tender coconut water
+Beverage,Chocolate Milk
+Beverage,Chocolate Drink
+Beverage,Appy
 Breads,Artisan Bread
 Breads,Bread
 Breads,Brown Bread
@@ -107,21 +147,11 @@ DalPulse,Tur
 DalPulse,Urad
 DalPulse,Urad Dal
 DalPulse,Varagu
-DessertsCookie,Biscuit
-DessertsCookie,Chikki
-DessertsCookie,Chocobar
-DessertsCookie,Chocolate Cookie
-DessertsCookie,Cookies
-DessertsCookie,Corneto
-DessertsCookie,Cream cone
-DessertsCookie,Ellunda
-DessertsCookie,Ice cream
-DessertsCookie,Kappalandi Muttai
-DessertsCookie,Kulfi
-DessertsCookie,Rusk
-DessertsCookie,Salt Biscuit
-DessertsCookie,Seasme Ball
-DessertsCookie,Tutti Fruitti
+Desserts,Chocobar
+Desserts,Corneto
+Desserts,Cream cone
+Desserts,Ice cream
+Desserts,Kulfi
 Dry Fruit,Abjosh
 Dry Fruit,Akhrot
 Dry Fruit,Almond
@@ -256,6 +286,7 @@ Grains,Surti Kolam Rice
 Grains,Thick Poha
 Grains,Vadi Matta Rice
 Grains,Wheat
+Grains,Oats
 Masala,Ajwain
 Masala,Amchoor
 Masala,Amchoor Powder
@@ -382,9 +413,149 @@ Oil,Vegetable Oil
 Oil,Velichenna
 Oil,Vilakkenna
 Oil,Virgin Coconut Oil
-ReadyToCook,Noodles
-ReadyToCook,Popcorn
-ReadyToCook,Soup
+SnackAndBranded,Noodles
+SnackAndBranded,Popcorn
+SnackAndBranded,Soup
+SnackAndBranded,Maggi
+SnackAndBranded,Yippee
+SnackAndBranded,Top Ramen
+SnackAndBranded,Knor
+SnackAndBranded,Atta Noodles
+SnackAndBranded,Instant Noodles
+SnackAndBranded,Oats Noodles
+SnackAndBranded,Vermicelli
+SnackAndBranded,Payasam Mix
+SnackAndBranded,Vermicelli Payasam Mix
+SnackAndBranded,Vermicelly Gheer Mix
+SnackAndBranded,Gheer Mix
+SnackAndBranded,Masala Oats
+SnackAndBranded,Macaroni Elbow
+SnackAndBranded,Macaroni
+SnackAndBranded,Cup Noodles
+SnackAndBranded,Hakka Noodles
+SnackAndBranded,Vermicelly Roasted
+SnackAndBranded,Soupy Noodles
+SnackAndBranded,Pasta
+SnackAndBranded,Pasta Penne
+SnackAndBranded,Pasta Elbow
+SnackAndBranded,Chocos
+SnackAndBranded,Museli
+SnackAndBranded,Corn Flakes
+SnackAndBranded,Oat Flakes
+SnackAndBranded,Ragi Bites
+SnackAndBranded,Tomato Ketchup
+SnackAndBranded,Ketchup
+SnackAndBranded,Jam
+SnackAndBranded,Fruit Jam
+SnackAndBranded,Mixed Fruit Jam
+SnackAndBranded,Honey
+SnackAndBranded,Chilly Sauce
+SnackAndBranded,Vinegar
+SnackAndBranded,Apple cider Vinegar
+SnackAndBranded,Synthetic Vinegar
+SnackAndBranded,Soy Sauce
+SnackAndBranded,Peanut Butter
+SnackAndBranded,Green Chilly Sauce
+SnackAndBranded,Mayyonaise
+SnackAndBranded,Potato Chips
+SnackAndBranded,Soya Sticks
+SnackAndBranded,Namkeen
+SnackAndBranded,Namkeen Moong Dal
+SnackAndBranded,Butter Murukku
+SnackAndBranded,Murukku
+SnackAndBranded,Achappam
+SnackAndBranded,Laddu
+SnackAndBranded,Mixture
+SnackAndBranded,Instant Popcorn
+SnackAndBranded,Popcorn
+SnackAndBranded,Aloo Bhujia
+SnackAndBranded,Mad Angles
+SnackAndBranded,Kurkure
+SnackAndBranded,Lays
+SnackAndBranded,Peanhut Salted
+SnackAndBranded,Peanut Namkeen
+SnackAndBranded,Banana Chipps
+SnackAndBranded,Upperi
+SnackAndBranded,Chakka Upperi
+SnackAndBranded,jackfruit chips
+SnackAndBranded,Biscuit
+SnackAndBranded,Chikki
+SnackAndBranded,Kappalandi Muttai
+SnackAndBranded,Salty Biscuit
+SnackAndBranded,Choloate Bisuit
+SnackAndBranded,Cream Biscuit
+SnackAndBranded,Seasme Ball
+SnackAndBranded,Ellunda
+SnackAndBranded,Rusk
+SnackAndBranded,Inji Muttai
+SnackAndBranded,Lollipop
+SnackAndBranded,Ribbon Pakoda
+SnackAndBranded,Pakkavada
+SnackAndBranded,Neyyappam
+SnackAndBranded,Unniyappam
+SnackAndBranded,Roasted GroundNut
+SnackAndBranded,Onion Rings Chips
+SnackAndBranded,Navaratna Mixture
+SnackAndBranded,Idli Batter
+SnackAndBranded,Dosa Batter
+SnackAndBranded,Idli Mix
+SnackAndBranded,Breakfast Mix
+SnackAndBranded,Pappadam
+SnackAndBranded,Appam Mix
+SnackAndBranded,Pan cake Mix
+SnackAndBranded,Papad
+SnackAndBranded,Gulab Jamun
+SnackAndBranded,Dosa Mix
+SnackAndBranded,Idli Mix
+SnackAndBranded,Upma Mix
+SnackAndBranded,Rasgulla
+SnackAndBranded,Rava Dosa Mix
+SnackAndBranded,Rava Idli Mix
+SnackAndBranded,Chuteny Powder
+SnackAndBranded,Wheat Chapati
+SnackAndBranded,Chapati
+SnackAndBranded,Poreotta
+SnackAndBranded,Kerala Porotta
+SnackAndBranded,Ready to eat
+SnackAndBranded,Dairy Milk
+SnackAndBranded,Kitcat
+SnackAndBranded,Snickers
+SnackAndBranded,Munch
+SnackAndBranded,Perk
+SnackAndBranded,Chocolate
+SnackAndBranded,Chikki
+SnackAndBranded,Gems
+SnackAndBranded,Popins
+SnackAndBranded,Pickle
+SnackAndBranded,Lemon Pickle
+SnackAndBranded,Mango Pickle
+SnackAndBranded,Chilly Pickle
+SnackAndBranded,Garlic Pickle
+SnackAndBranded,Fish Pickle
+SnackAndBranded,Chutney Powder
+SnackAndBranded,Gongura Pickle
+SnackAndBranded,Ginger Garlic paste
+SnackAndBranded,Prawn Pickle
+SnackAndBranded,Amla Candy
+SnackAndBranded,Jackfruit Pickle
+SnackAndBranded,Tomato Pickle
+SnackAndBranded,Sona Papadi
+SnackAndBranded,Til Chikki
+Frozen,Frozen Veggies
+Frozen,Frozen green peas
+Frozen,Frozen Sweet Corn
+Frozen,Frozen Potato Nuggets
+Frozen,Frozen Chicken Nuggets
+Frozen,Frozen Nuggets
+Frozen,Frozen French Fries
+Frozen,Frozen Aloo Tikki
+Frozen,Frozen Burger Patti
+Frozen,Frozen Cheesy Nuggets
+Frozen,Frozen Sausages
+Frozen,Frozen Smile Crispy
+Frozen,Frozen Chicken Kabab
+Frozen,Frozen Mixed Vegetables
+Frozen,Frozen Samosa
 SaltSugar,Brows Sugar
 SaltSugar,Diamond Sugar
 SaltSugar,Himalayan Pink Salt
@@ -485,3 +656,261 @@ Vegetable,Tomato
 Vegetable,Vegetable
 Vegetable,Yam
 Vegetable,Zucchini
+Vegetable,Jack Fruit
+HouseHold,Harpic
+HouseHold,Lyzol
+HouseHold,Closet Cleaner
+HouseHold,Floor Cleaner
+HouseHold,Dish wash Gel
+HouseHold,Dish wash Bar
+HouseHold,Surface Cleaner
+HouseHold,Glass Cleaner
+HouseHold,Garbage Bags
+HouseHold,Detergent Powder
+HouseHold,Surf Excel
+HouseHold,Arial
+HouseHold,Rin
+HouseHold,Tide
+HouseHold,Ujala Detergent Powder
+HouseHold,Ujala
+HouseHold,Bathroom Cleaner
+HouseHold,Mosquito Repellent
+HouseHold,Hit
+HouseHold,Good night
+HouseHold,Detergent Liquid
+HouseHold,Mop
+HouseHold,Spin Mop
+HouseHold,Kitchen Towel
+HouseHold,Cleaning Towel
+HouseHold,Table Cover
+HouseHold,Naphthalene
+HouseHold,Kitchen Cloth
+HouseHold,Napkins
+HouseHold,Sponge Wipe
+HouseHold,Broom
+HouseHold,Grass Broom
+HouseHold,Toilet Tissue
+HouseHold,Jhadu
+HouseHold,Floor Mop
+HouseHold,Car Freshener
+HouseHold,Air Freshener
+HouseHold,Aluminium Foil
+HouseHold,Aluminium Foil Plate
+HouseHold,Paper Plate
+HouseHold,Organic Plate
+HouseHold,Paper Cup
+HouseHold,Scrubber
+HouseHold,Matchbox
+HouseHold,Insect Repellent
+HouseHold,Wet Wipe
+HouseHold,Pocket Tissue
+HouseHold,DustPan
+HouseHold,Kitchen Wiper
+HouseHold,Kitchen Gloves
+HouseHold,Candles
+HouseHold,Agarbatti
+HouseHold,Lamp Wicks
+HouseHold,Vlakku thiri
+HouseHold,Theeppetti
+HouseHold,Camphor
+HouseHold,Sandal
+HouseHold,Sandal Powder
+HouseHold,Dust Bin
+HouseHold,Bucket
+HouseHold,Mug
+HouseHold,Waste Segregation Kit
+HouseHold,Basket
+HouseHold,Plastic Basket
+HouseHold,Photo Frame
+HouseHold,Hanger
+HouseHold,Clips
+HouseHold,Bathroom Stool
+HouseHold,Stool
+HouseHold,Chair
+HouseHold,Chair Cover
+HouseHold,Cloth Rope
+HouseHold,Laundry Basket
+HouseHold,Bottle Brush
+HouseHold,Masala Box
+HouseHold,Party Cup
+HouseHold,Party Plates
+HouseHold,Wooden Spoon
+HouseHold,Wooden Fork
+HouseHold,Wooden Knife
+HouseHold,Shine Sponge
+HouseHold,Air Freshener Gel
+HouseHold,Car Freshener
+HouseHold,Shoe Polish
+HouseHold,Car Brush
+HouseHold,Instant Polish
+HouseHold,Protectant Spray
+HouseHold,Fabric Conditioner
+Stationery, Drawing Book
+Stationery,Book
+Stationery,Story Book
+Stationery,Alphabet Book
+Stationery,Number Book
+Stationery,Adhesive
+Stationery,Pasa
+Stationery,Fevicol
+Stationery,Fevikwik
+Stationery,Note Book
+Stationery,Pencils
+Stationery,Color Pencils
+Stationery,Sketch Pen
+Stationery,Marker
+Stationery,Permanent Marker
+Stationery,Pencil Cutter
+Stationery,Eraser
+Stationery,Instrument Box
+Stationery,Crayons
+Stationery,Slate
+Stationery,Magic Slate
+Stationery,Geometry Box
+Stationery,Fevistik
+Stationery,Super Glue
+Stationery,Glue
+Stationery,Fevibond
+Stationery,Note Book Lined
+Stationery,Rubber Bands
+Stationery,Insulation Tape
+Stationery,Acrylic Colors
+Stationery,Pen
+Stationery,Refill
+Stationery,Alarm Clock
+Stationery,Clock
+Stationery,Stapler
+Stationery,Scissors
+BeautyAndHygiene,Dettol
+BeautyAndHygiene,Hand Wash
+BeautyAndHygiene,Hand Sanitizer
+BeautyAndHygiene,Hand wash liquid Refill
+BeautyAndHygiene,Bathing Soap
+BeautyAndHygiene,Soap
+BeautyAndHygiene,Dove
+BeautyAndHygiene,Lux
+BeautyAndHygiene,Rexona
+BeautyAndHygiene,Lyril
+BeautyAndHygiene,Mysore Sanal
+BeautyAndHygiene,Hamam
+BeautyAndHygiene,Margo
+BeautyAndHygiene,Chandrika
+BeautyAndHygiene,Cynthol
+BeautyAndHygiene,Camy
+BeautyAndHygiene,Patanjali Soap
+BeautyAndHygiene,Parachute coconut Oil
+BeautyAndHygiene,Coconut Hair Oil
+BeautyAndHygiene,Sanitary Pads
+BeautyAndHygiene,Pears
+BeautyAndHygiene,Tooth Paste
+BeautyAndHygiene,Colgate
+BeautyAndHygiene,Close Up
+BeautyAndHygiene,Pepsodent
+BeautyAndHygiene,Sensodine
+BeautyAndHygiene,Mouth Wash
+BeautyAndHygiene,Mask
+BeautyAndHygiene,Face Mask
+BeautyAndHygiene,Dabur Tooth Paste
+BeautyAndHygiene,Medimix
+BeautyAndHygiene,Chyavanprash
+BeautyAndHygiene,Shampoo
+BeautyAndHygiene,Pantene
+BeautyAndHygiene,All Clear
+BeautyAndHygiene,Himalaya Shampoo
+BeautyAndHygiene,Body Lotion
+BeautyAndHygiene,Face Wash
+BeautyAndHygiene,Moisturiser
+BeautyAndHygiene,Nivea
+BeautyAndHygiene,Himalaya Moisturiser
+BeautyAndHygiene,Lacto Calamine
+BeautyAndHygiene,Waxing Strip
+BeautyAndHygiene,Sunsilk Shampoo
+BeautyAndHygiene,Hair Removal Razor
+BeautyAndHygiene,Trimmer
+BeautyAndHygiene,Razor
+BeautyAndHygiene,Razor Blade
+BeautyAndHygiene,Blade
+BeautyAndHygiene,Finger Gloves
+BeautyAndHygiene,Rose Water
+BeautyAndHygiene,Ayurvedic Toothpaste
+BeautyAndHygiene,Tooth Brush
+BeautyAndHygiene,OralB Brush
+BeautyAndHygiene,Band Aid
+BeautyAndHygiene,BodyWash
+BeautyAndHygiene,Liquid Soap
+BeautyAndHygiene,Shower Gel
+BeautyAndHygiene,Lifebuoy
+BeautyAndHygiene,Lifebuoy Plus
+BeautyAndHygiene,Cotton Buds
+BeautyAndHygiene,Vaseline
+BeautyAndHygiene,Kids Brush
+BeautyAndHygiene,Talc Powder
+BeautyAndHygiene,Powder
+BeautyAndHygiene,Shaving Blades
+BeautyAndHygiene,Shaving Gel
+BeautyAndHygiene,Shaving Cream
+BeautyAndHygiene,After Shave Lotion
+BeautyAndHygiene,After Shave
+BeautyAndHygiene,Fair & Handsome
+BeautyAndHygiene,Deodorant
+BeautyAndHygiene,Talc
+BeautyAndHygiene,Hair Removal Cream
+BeautyAndHygiene,After Bath Gel
+BeautyAndHygiene,Hair Cream
+BeautyAndHygiene,Conditioner
+BeautyAndHygiene,Wipes
+BeautyAndHygiene,Wet Wipes
+BeautyAndHygiene,Intimate Wipes
+BeautyAndHygiene,Tongue Cleaner
+BeautyAndHygiene,Nail Polish
+BeautyAndHygiene,Nail Cutter
+BeautyAndHygiene,Nail Color Remover
+BeautyAndHygiene,Kajal
+BeautyAndHygiene,Bindi
+BeautyAndHygiene,Eye Liner
+BeautyAndHygiene,Nail Polish Remover
+BeautyAndHygiene,Pen Liner
+BeautyAndHygiene,Lipstick
+BeautyAndHygiene,Lip Balm
+BeautyAndHygiene,Foundation
+BeautyAndHygiene,Cleansing Water
+BeautyAndHygiene,Nail Enamel
+BeautyAndHygiene,Makeup Cleanser
+BeautyAndHygiene,Mirror
+BeautyAndHygiene,Compact Mirror
+BeautyAndHygiene,Pedicure File
+BeautyAndHygiene,Fair and Lovely
+BeautyAndHygiene,Fairness Cream
+BabyCare,Baby Food
+BabyCare,NAN
+BabyCare,Cerelac
+BabyCare,Similac
+BabyCare,Pampers
+BabyCare,Snugges
+BabyCare,Momy Poco Pants
+BabyCare,Baby Soap
+BabyCare,Baby Shampoo
+BabyCare,Diaper Small
+BabyCare,Diaper Medium
+BabyCare,Diaper Large
+BabyCare,Diaper XL
+BabyCare,Diaper XXL
+BabyCare,Baby Wipes
+BabyCare,Baby Wet Wipes
+BabyCare,Lactogen
+BabyCare,Baby Powder
+BabyCare,Huggies
+BabyCare,Baby Cotton Pads
+BabyCare,Baby Cream
+BabyCare,Toys
+BabyCare,Organic Baby Food
+BabyCare,Fabric Conditioner For Baby
+BabyCare,Breast Pads for mothers
+BabyCare,Stretch Marks Oil
+BabyCare,Sipper Cup
+BabyCare,Feeding Bottle
+BabyCare,Nipple
+BabyCare,Soft Silicon Spoon
+BabyCare,Weaning Bottle
+BabyCare,Babies Bib
+BabyCare,Infant Nail Scissors
