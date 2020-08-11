@@ -55,15 +55,15 @@
   shopping list.
 </div>
 
-<div *ngIf="pendingItems.length === 0 && cartedItems.length != 0" class="mat-body-2">Congratulations!. You have
-  picked all the items
+<div *ngIf="pendingItems.length === 0 && cartedItems.length != 0" class="mat-body-2" align="center">Congratulations!. You have
+  picked all {{this.cartedItems.length}} items
 </div>
 
 <table #pendingTable="matTable" [dataSource]="pendingItems" class="mat-elevation-z8" mat-table>
 
   <ng-container matColumnDef="no">
     <th *matHeaderCellDef mat-header-cell> No</th>
-    <td *matCellDef="let item" mat-cell> {{pendingItems.indexOf(item) + 1}} </td>
+    <td *matCellDef="let item" mat-cell> {{(pendingItems.length - pendingItems.indexOf(item))}} </td>
   </ng-container>
 
   <ng-container matColumnDef="item">
@@ -100,7 +100,7 @@
 
   <ng-container matColumnDef="no">
     <th *matHeaderCellDef mat-header-cell> No</th>
-    <td *matCellDef="let item" mat-cell> {{cartedItems.indexOf(item) + 1}} </td>
+    <td *matCellDef="let item" mat-cell> {{(cartedItems.length - cartedItems.indexOf(item))}} </td>
   </ng-container>
 
   <ng-container matColumnDef="item">
