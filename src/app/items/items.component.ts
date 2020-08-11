@@ -22,7 +22,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   filteredItems: Observable<string[]>;
   itemInputControl = new FormControl();
   itemCategories = {};
-  categoryOrder = {other: 99999};
+  categoryOrder = {other: 0};
 
   pendingItems = [];
   categorizedPendingItems = [];
@@ -74,6 +74,14 @@ export class ItemsComponent implements OnInit, OnDestroy {
   add(): void {
     if (this.newItem.trim() === '') {
       this.inputPlaceHolder = 'Please enter a valid item';
+      return;
+    } else if (this.pendingItems.indexOf(this.newItem) > -1) {
+      this.inputPlaceHolder = `You already have '${this.newItem}' in list`;
+      this.newItem = '';
+      return;
+    } else if (this.cartedItems.indexOf(this.newItem) > -1) {
+      this.inputPlaceHolder = `You already picked '${this.newItem}'`;
+      this.newItem = '';
       return;
     }
 
@@ -157,7 +165,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
     } catch (error) {
       console.log('You shopping list is not shared, reason: ', error);
-
+      this.shareDialog();
     }
   }
 
@@ -165,8 +173,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.shoppingListService.getCategorizedItems().subscribe((categoyItems: any) => {
       categoyItems.forEach((itemList) => {
         itemList.items.forEach((item) => {
-          this.itemsMasterList.push(item);
-          this.itemCategories[item] = itemList.category;
+          const itemInLowerCase = item.toLowerCase();
+          this.itemsMasterList.push(itemInLowerCase);
+          this.itemCategories[itemInLowerCase] = itemList.category;
         });
         this.categoryOrder[itemList.category] = itemList.order;
       });
@@ -223,6 +232,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
       this.pendingItems = data.pending;
       this.cartedItems = data.cart;
       this.arrangePending();
+      this.arrangeCart();
     }
   }
 
@@ -236,35 +246,41 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.inputPlaceHolder = 'Enter an Item';
   }
 
-  private reloadCartFromCategorizedCartedItemsList(): void {
-    this.cartedItems = [];
-    this.categorizedCartedItems.sort((first, second) => Number(this.categoryOrder[first]) - Number(this.categoryOrder[second]));
-    // TODO soring is mixed up
-    Object.keys(this.categorizedCartedItems).forEach((categoryEntry) => {
-      this.categorizedCartedItems[categoryEntry].sort();
-      this.categorizedCartedItems[categoryEntry].forEach(categoryItem => this.cartedItems.push(categoryItem));
+  private reloadItemsFromCategorizedItems(categorizedItems): Array<string> {
+    const arrangedItems = [];
+    categorizedItems.forEach(items => {
+      items.sort();
+      items.forEach(item => arrangedItems.push(item));
     });
-  }
-
-  private reloadPendingItemsFromCategorizedPendingItemsList(): void {
-    this.pendingItems = [];
-    this.categorizedPendingItems.sort((first, second) => Number(this.categoryOrder[first]) - Number(this.categoryOrder[second]));
-    Object.keys(this.categorizedPendingItems).forEach((categoryEntry) => {
-      this.categorizedPendingItems[categoryEntry].sort();
-      this.categorizedPendingItems[categoryEntry].forEach(categoryItem => this.pendingItems.push(categoryItem));
-    });
+    return arrangedItems;
   }
 
   private addItemToCategorizedList(item, category, categorizedList): void {
-    if (!categorizedList[category]) {
-      categorizedList[category] = [];
+    const order = this.categoryOrder[category];
+
+    if (!categorizedList[order]) {
+      categorizedList[order] = [];
     }
-    categorizedList[category].push(item);
-    console.log(`addItemToCategorizedList: ${JSON.stringify(categorizedList[category])}`);
+    categorizedList[order].push(item);
+
+    console.log(`updated the list at index ${order} to  ${categorizedList[order]}`);
+  }
+
+  private addAllItemsToCategorizedList(items): Array<object> {
+    const categorizedList = [];
+    items.forEach(item => {
+      const order = this.categoryOrder[this.getItemCategory(item)];
+      if (!categorizedList[order]) {
+        categorizedList[order] = [];
+      }
+      categorizedList[order].push(item);
+      console.log(`updated the list at index ${order} to  ${categorizedList[order]}`);
+    });
+    return categorizedList;
   }
 
   private getItemCategory(item): string {
-    let category = this.itemCategories[item];
+    let category = this.itemCategories[item.toLowerCase()];
     if (!category) {
       category = 'other';
     }
@@ -272,23 +288,14 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   private arrangePending(): void {
-    this.categorizedPendingItems = [];
-    console.log(`categorizedPendingItems: ${JSON.stringify(this.categorizedPendingItems)}`);
-    this.pendingItems.forEach((pending) => {
-      this.addItemToCategorizedList(pending, this.getItemCategory(pending), this.categorizedPendingItems);
-    });
-    console.log(`after adding categorizedPendingItems: ${JSON.stringify(this.categorizedPendingItems)}`);
-
-    this.reloadPendingItemsFromCategorizedPendingItemsList();
+    this.categorizedPendingItems = this.addAllItemsToCategorizedList(this.pendingItems);
+    this.pendingItems = this.reloadItemsFromCategorizedItems(this.categorizedPendingItems);
     this.pendingTable.renderRows();
   }
 
   private arrangeCart(): void {
-    this.categorizedCartedItems = [];
-    this.cartedItems.forEach((carted) => {
-      this.addItemToCategorizedList(carted, this.getItemCategory(carted), this.categorizedCartedItems);
-    });
-    this.reloadCartFromCategorizedCartedItemsList();
+    this.categorizedCartedItems = this.addAllItemsToCategorizedList(this.cartedItems);
+    this.cartedItems = this.reloadItemsFromCategorizedItems(this.categorizedCartedItems);
     this.cartTable.renderRows();
   }
 }
