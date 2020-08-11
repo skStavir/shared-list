@@ -162,10 +162,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
       }).then((val) => console.log('success'), (err) => {
         console.log('error');
       });
-
+      this.shareDialog();
     } catch (error) {
       console.log('You shopping list is not shared, reason: ', error);
-      this.shareDialog();
     }
   }
 
