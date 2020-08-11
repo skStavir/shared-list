@@ -32,8 +32,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   interval: number;
   syncInProgress = false;
 
-  serverUrl = 'http://localhost:4200?id=';
-  // serverUrl = 'https://quickshoppinglist.com?id=';
+  // serverUrl = 'http://localhost:4200?id=';
+  serverUrl = 'https://quickshoppinglist.com?id=';
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
