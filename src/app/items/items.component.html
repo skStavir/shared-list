@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <mat-toolbar color="primary">
   <span>Quick Shopping List</span>
   <span class="toolbar-spacer"></span>
@@ -11,9 +12,18 @@
     <mat-icon>settings</mat-icon>
   </button>
   <mat-menu #settings="matMenu">
-    <button (click)="story()" mat-menu-item>Story</button>
-    <button (click)="about()" mat-menu-item>About</button>
-    <button (click)="mailTo()" mat-menu-item>Contact us</button>
+    <button (click)="story()" mat-menu-item>
+      <mat-icon>book</mat-icon>
+      Story
+    </button>
+    <button (click)="about()" mat-menu-item>
+      <mat-icon>group</mat-icon>
+      About
+    </button>
+    <button (click)="mailTo()" mat-menu-item>
+      <mat-icon>phone</mat-icon>
+      Contact us
+    </button>
   </mat-menu>
 </mat-toolbar>
 
