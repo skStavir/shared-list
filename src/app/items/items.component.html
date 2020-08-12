@@ -43,7 +43,7 @@
   <ng-container matColumnDef="add">
     <th *matHeaderCellDef mat-header-cell> Add</th>
     <td *matCellDef="let item" mat-cell>
-      <button (click)="add()" color="primary" mat-raised-button>add item</button>
+      <button (click)="add()"><mat-icon>add</mat-icon></button>
     </td>
   </ng-container>
 
@@ -74,16 +74,14 @@
   <ng-container matColumnDef="gotIt">
     <th *matHeaderCellDef mat-header-cell> Picked</th>
     <td *matCellDef="let item" mat-cell>
-      <button (click)="cart(item)" color="success" mat-raised-button matTooltip="move item to the cart">pick</button>
+      <button (click)="cart(item)"><mat-icon>add_shopping_cart</mat-icon></button>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="remove">
     <th *matHeaderCellDef mat-header-cell> Remove</th>
     <td *matCellDef="let item" mat-cell>
-      <button (click)="remove(item)" color="warn" mat-raised-button matTooltip="permanently remove item from the list">
-        remove
-      </button>
+      <button (click)="remove(item)"><mat-icon>delete</mat-icon></button>
     </td>
   </ng-container>
 
@@ -92,7 +90,7 @@
 
 <mat-divider></mat-divider>
 
-<h3 matSubheader>My Cart - already picked items</h3>
+<h3 matSubheader><mat-icon>add_shopping_cart</mat-icon> (Picked items)</h3>
 
 <div *ngIf="cartedItems.length ===0" class="mat-body-2">You are yet to pick up an item.</div>
 
@@ -103,19 +101,16 @@
     <td *matCellDef="let item" mat-cell> {{(cartedItems.length - cartedItems.indexOf(item))}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="item">
+  <ng-container matColumnDef="cartItem">
     <th *matHeaderCellDef mat-header-cell> Name</th>
     <td *matCellDef="let item" class="mat-body-2" mat-cell> {{item}} </td>
   </ng-container>
 
 
-  <ng-container matColumnDef="remove">
+  <ng-container matColumnDef="undo">
     <th *matHeaderCellDef mat-header-cell> Not in</th>
     <td *matCellDef="let item" mat-cell>
-      <button (click)="pending(item)" color="primary" mat-raised-button
-              matTooltip="move item back to the shopping list">
-        drop
-      </button>
+      <button (click)="pending(item)"><mat-icon>undo</mat-icon></button>
     </td>
   </ng-container>
 
@@ -125,7 +120,7 @@
     </td>
   </ng-container>
 
-  <tr *matRowDef="let row; columns: ['no', 'item', 'remove', 'filler'];" mat-row></tr>
+  <tr *matRowDef="let row; columns: ['no', 'cartItem', 'undo', 'filler'];" mat-row></tr>
 </table>
 
 <mat-divider></mat-divider>
