@@ -51,7 +51,7 @@
     </td>
   </ng-container>
 
-  <tr *matRowDef="let row; columns: ['no','itemInput', 'add'];" mat-row></tr>
+  <tr *matRowDef="let row; columns: ['itemInput', 'add'];" mat-row></tr>
 </table>
 
 
@@ -64,11 +64,6 @@
 </div>
 
 <table #pendingTable="matTable" [dataSource]="pendingItems" class="mat-elevation-z8" mat-table>
-
-  <ng-container matColumnDef="no">
-    <th *matHeaderCellDef mat-header-cell> No</th>
-    <td *matCellDef="let item" mat-cell> {{(pendingItems.length - pendingItems.indexOf(item))}} </td>
-  </ng-container>
 
   <ng-container matColumnDef="item">
     <th *matHeaderCellDef mat-header-cell> Name</th>
@@ -96,20 +91,14 @@
   <tr *matRowDef="let row; columns: [ 'item', 'gotIt', 'remove'];" mat-row></tr>
 </table>
 
-<mat-divider></mat-divider>
-
-<h3 matSubheader style="margin-top: 1em">
-  <mat-icon matBadge="{{cartedItems.length}}" matBadgeColor="primary" style="vertical-align: middle">add_shopping_cart
+<h3 matSubheader style="margin-top: 1em;">
+  <mat-icon matBadge="{{cartedItems.length}}" matBadgeColor="primary"
+            style="vertical-align: middle; margin-left: 1em; margin-right: 0.5em;">add_shopping_cart
   </mat-icon>
   (Carted items)
 </h3>
 
 <table #cartTable="matTable" [dataSource]="cartedItems" class="mat-elevation-z8" mat-table>
-
-  <ng-container matColumnDef="no">
-    <th *matHeaderCellDef mat-header-cell> No</th>
-    <td *matCellDef="let item" mat-cell> {{(cartedItems.length - cartedItems.indexOf(item))}} </td>
-  </ng-container>
 
   <ng-container matColumnDef="cartItem">
     <th *matHeaderCellDef mat-header-cell> Name</th>
@@ -132,15 +121,12 @@
     </td>
   </ng-container>
 
-  <tr *matRowDef="let row; columns: [ 'cartItem', 'undo', 'filler'];" mat-row></tr>
+  <tr *matRowDef="let row; columns: [ 'cartItem', 'filler', 'undo'];" mat-row></tr>
 </table>
 
-<mat-divider></mat-divider>
-
-<div align="center">
+<div style="text-align: center; margin-top: 1em;">
   <button (click)="doneShopping()" matTooltip="Clear the list and create new">
     <mat-icon>done</mat-icon>
   </button>
 </div>
-<mat-divider></mat-divider>
 
