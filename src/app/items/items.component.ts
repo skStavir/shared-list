@@ -168,6 +168,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
     }
   }
 
+  story(): void {
+    location.href = 'https://quickshoppinglist.com/story.html';
+  }
+
   private thisLoadItemsAndCategories(): void {
     this.shoppingListService.getCategorizedItems().subscribe((categoyItems: any) => {
       categoyItems.forEach((itemList) => {

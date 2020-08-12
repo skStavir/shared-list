@@ -20,6 +20,7 @@ import {ShareDialogComponent} from './share-dialog/share-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatDialogModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBadgeModule
   ],
   entryComponents: [
     ShareDialogComponent
