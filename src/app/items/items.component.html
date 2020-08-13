@@ -100,13 +100,14 @@
 
   <tr *matRowDef="let row; columns: [ 'item', 'gotIt', 'remove'];" mat-row></tr>
 </table>
-
-<h3 matSubheader style="margin-top: 1em;">
-  <mat-icon matBadge="{{cartedItems.length}}" matBadgeColor="primary"
-            style="vertical-align: middle; margin-left: 1em; margin-right: 0.5em;">add_shopping_cart
-  </mat-icon>
-  (Carted items)
-</h3>
+<div *ngIf="pendingItems.length != 0 || cartedItems.length != 0" class="mat-body-2">
+  <h3 matSubheader style="margin-top: 1em;">
+    <mat-icon matBadge="{{cartedItems.length}}" matBadgeColor="primary"
+              style="vertical-align: middle; margin-left: 1em; margin-right: 0.5em;">add_shopping_cart
+    </mat-icon>
+    (Carted items)
+  </h3>
+</div>
 
 <table #cartTable="matTable" [dataSource]="cartedItems" class="mat-elevation-z8" mat-table>
 
