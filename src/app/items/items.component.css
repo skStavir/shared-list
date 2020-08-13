@@ -7,6 +7,12 @@ table {
   width: 100%;
 }
 
+/*.mat-table-veggie {*/
+/*  background: #00FF6D;*/
+/*  opacity: 1;*/
+/*}*/
+
+
 .mat-column-no {
   flex: 0 0 15% !important;
   width: 15% !important;
