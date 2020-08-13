@@ -85,8 +85,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.newItem = this.capitalizeFirstLetter(this.newItem);
     this.pendingItems.push(this.newItem);
-
     this.arrangePending();
 
     this.syncData('ADD', this.newItem);
@@ -162,9 +162,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
       }).then((val) => console.log('success'), (err) => {
         console.log('error');
       });
-      this.shareDialog();
     } catch (error) {
       console.log('You shopping list is not shared, reason: ', error);
+      this.shareDialog();
     }
   }
 
@@ -172,17 +172,20 @@ export class ItemsComponent implements OnInit, OnDestroy {
     location.href = 'https://quickshoppinglist.com/story.html';
   }
 
+  private capitalizeFirstLetter(item): string {
+    return this.newItem.charAt(0).toUpperCase() + this.newItem.slice(1);
+  }
+
   private thisLoadItemsAndCategories(): void {
     this.shoppingListService.getCategorizedItems().subscribe((categoyItems: any) => {
       categoyItems.forEach((itemList) => {
         itemList.items.forEach((item) => {
           const itemInLowerCase = item.toLowerCase();
-          this.itemsMasterList.push(itemInLowerCase);
+          this.itemsMasterList.push(item);
           this.itemCategories[itemInLowerCase] = itemList.category;
         });
         this.categoryOrder[itemList.category] = itemList.order;
       });
-      console.log('this.categoryOrder' + JSON.stringify(this.categoryOrder));
       this.setUpAutocompleteFilter();
       this.arrangePending();
       this.arrangeCart();
@@ -256,17 +259,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
       items.forEach(item => arrangedItems.push(item));
     });
     return arrangedItems;
-  }
-
-  private addItemToCategorizedList(item, category, categorizedList): void {
-    const order = this.categoryOrder[category];
-
-    if (!categorizedList[order]) {
-      categorizedList[order] = [];
-    }
-    categorizedList[order].push(item);
-
-    console.log(`updated the list at index ${order} to  ${categorizedList[order]}`);
   }
 
   private addAllItemsToCategorizedList(items): Array<object> {
