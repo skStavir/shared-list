@@ -22,8 +22,8 @@ function buildInitialShoppingList(id) {
     TableName: 'shoppinglist',
     Item: {
       'id': id,
-      'pending': ['rice', 'pen'],
-      'cart': ['atta', 'pencil'],
+      'pending': ['Milk'],
+      'cart': [],
     }
   };
   return newParams;
