@@ -15,6 +15,10 @@ import {NgNavigatorShareService} from 'ng-navigator-share';
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent implements OnInit, OnDestroy {
+
+  // serverUrl = 'http://localhost:4200?id=';
+  serverUrl = 'https://quickshoppinglist.com?id=';
+
   id: string;
   newItem: string;
   inputPlaceHolder: string;
@@ -32,9 +36,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
   interval: number;
   syncInProgress = false;
 
-  // serverUrl = 'http://localhost:4200?id=';
-  serverUrl = 'https://quickshoppinglist.com?id=';
-
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
 
@@ -50,7 +51,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
     this.route.queryParams.subscribe(params => {
       this.id = params.id;
-      console.log('id from url: ' + this.id);
     });
 
     if (this.id) {
@@ -64,7 +64,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
     } else {
       this.shoppingListService.fetchData(undefined).subscribe((data: any) => {
         console.log('created a shopping list : ' + JSON.stringify(data));
-        console.log('navigating to new shopping list');
         window.location.href = `${this.serverUrl}${data.id}`;
       });
     }
@@ -118,6 +117,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   remove(item): void {
     const index = this.pendingItems.indexOf(item);
     this.pendingItems.splice(index, 1);
+    this.itemsMasterList.push(item);
 
     this.arrangePending();
 
@@ -218,7 +218,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
     }
     console.log('reloading data from server');
     this.shoppingListService.fetchData(this.id).subscribe((data: any) => {
-      console.log('shopping list from server : ' + JSON.stringify(data));
       this.updateDataFromServer(data);
     });
   }
@@ -227,7 +226,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.syncInProgress = true;
     console.log(`syncing updated data to server action:${action} item:${item}`);
     this.shoppingListService.updateData(this.id, action, item).subscribe((data: any) => {
-      console.log('save response : ' + JSON.stringify(data));
       this.syncInProgress = false;
     });
   }
@@ -236,10 +234,18 @@ export class ItemsComponent implements OnInit, OnDestroy {
     if (data) {
       this.id = data.id;
       this.pendingItems = data.pending;
-      this.cartedItems = data.cart;
+      data.pending.forEach(item => this.removeItemFromMasterList(item));
       this.arrangePending();
+
+      this.cartedItems = data.cart;
+      data.cart.forEach(item => this.removeItemFromMasterList(item));
       this.arrangeCart();
     }
+  }
+
+  private removeItemFromMasterList(item): void {
+    const index = this.itemsMasterList.indexOf(item);
+    this.itemsMasterList.splice(index, 1);
   }
 
   private resetInput(): void {
@@ -269,7 +275,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
         categorizedList[order] = [];
       }
       categorizedList[order].push(item);
-      console.log(`updated the list at index ${order} to  ${categorizedList[order]}`);
     });
     return categorizedList;
   }
