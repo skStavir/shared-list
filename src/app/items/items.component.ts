@@ -16,8 +16,8 @@ import {NgNavigatorShareService} from 'ng-navigator-share';
 })
 export class ItemsComponent implements OnInit, OnDestroy {
 
-  // serverUrl = 'http://localhost:4200?id=';
-  serverUrl = 'https://quickshoppinglist.com?id=';
+  serverUrl = 'http://localhost:4200?id=';
+  // serverUrl = 'https://quickshoppinglist.com?id=';
 
   id: string;
   newItem: string;
@@ -53,7 +53,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
       this.id = params.id;
     });
 
-    if (this.id) {
+    if (this.isValidId()) {
       console.log('loading data of list id : ' + this.id);
       this.shoppingListService.fetchData(this.id).subscribe((data: any) => {
         console.log('shopping list from server : ' + JSON.stringify(data));
@@ -170,6 +170,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   story(): void {
     location.href = 'https://quickshoppinglist.com/story.html';
+  }
+
+  private isValidId() {
+    return this.id && this.id != undefined && this.id != 'undefined';
   }
 
   private capitalizeFirstLetter(item): string {
