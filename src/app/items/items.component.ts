@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {NgNavigatorShareService} from 'ng-navigator-share';
+import {error} from 'selenium-webdriver';
 
 @Component({
   selector: 'app-items',
@@ -34,8 +35,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   categorizedCartedItems = [];
 
   interval: number;
-  syncInProgress = false;
   syncSuccess = true;
+  pendingForPush = [];
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
@@ -56,14 +57,14 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
     if (this.isValidId()) {
       console.log('loading data of list id : ' + this.id);
-      this.shoppingListService.fetchData(this.id).subscribe((data: any) => {
+      this.shoppingListService.fetchLatestList(this.id).subscribe((data: any) => {
         console.log('shopping list from server : ' + JSON.stringify(data));
-        this.updateDataFromServer(data);
+        this.refreshUiWithLatestDataFromServer(data);
         this.enabledReload();
       });
 
     } else {
-      this.shoppingListService.fetchData(undefined).subscribe((data: any) => {
+      this.shoppingListService.fetchLatestList(undefined).subscribe((data: any) => {
         console.log('created a shopping list : ' + JSON.stringify(data));
         window.location.href = `${this.serverUrl}${data.id}`;
       });
@@ -89,7 +90,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.pendingItems.push(this.newItem);
     this.arrangePending();
 
-    this.syncData('ADD', this.newItem);
+    this.pushData('ADD', this.newItem);
     this.resetInput();
   }
 
@@ -101,7 +102,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.arrangePending();
     this.arrangeCart();
 
-    this.syncData('PICKED', item);
+    this.pushData('PICKED', item);
   }
 
   pending(item): void {
@@ -112,7 +113,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.arrangePending();
     this.arrangeCart();
 
-    this.syncData('DROPPED', item);
+    this.pushData('DROPPED', item);
   }
 
   remove(item): void {
@@ -122,7 +123,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
     this.arrangePending();
 
-    this.syncData('REMOVE', item);
+    this.pushData('REMOVE', item);
   }
 
   doneShopping(): void {
@@ -212,30 +213,60 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   private enabledReload(): void {
     this.interval = setInterval(() => {
-      this.reloadData();
+      this.doPendingPushToServer();
+      this.pullDataFromServer();
     }, 10000);
   }
 
-  private reloadData(): void {
-    if (this.syncInProgress) {
-      console.log('skipping reload since sync is in progress');
+  private doPendingPushToServer(): void {
+    if (this.isPushPending()) {
+      console.log('do pending push');
+      this.pushChain(this.pendingForPush[0]);
+    }
+  }
+
+  private isPushPending() {
+    return this.pendingForPush.length > 0;
+  }
+
+  private pullDataFromServer(): void {
+    if (this.isPushPending()) {
+      console.log('skipping reload since push is pending progress');
       return;
     }
-    console.log('reloading data from server');
-    this.shoppingListService.fetchData(this.id).subscribe((data: any) => {
-      this.updateDataFromServer(data);
+    console.log('pull data from server');
+    this.shoppingListService.fetchLatestList(this.id).subscribe((data: any) => {
+      this.refreshUiWithLatestDataFromServer(data);
+      this.syncSuccess = true;
+    }, error => {
+      this.syncSuccess = false;
     });
   }
 
-  private syncData(action, item): void {
-    this.syncInProgress = true;
-    console.log(`syncing updated data to server action:${action} item:${item}`);
-    this.shoppingListService.updateData(this.id, action, item).subscribe((data: any) => {
-      this.syncInProgress = false;
+  private pushData(action, item): void {
+    this.pendingForPush.push({action, item});
+    this.pushChain(this.pendingForPush[0]);
+  }
+
+  //Order of the actions is important
+  private pushChain(actionAndItem) {
+    console.log(`pushing  action:${JSON.stringify(actionAndItem)} to server`);
+    this.shoppingListService.updateData(this.id, actionAndItem.action, actionAndItem.item).subscribe((data: any) => {
+      this.pendingForPush.shift();
+      if (this.isPushPending()) {
+        console.log('continue push next action');
+        this.pushChain(this.pendingForPush[0]);
+      } else {
+        console.log('No more actions pending. push done');
+        this.syncSuccess = true;
+      }
+    }, (error) => {
+      console.log('push failed. stopping push');
+      this.syncSuccess = false;
     });
   }
 
-  private updateDataFromServer(data: any): void {
+  private refreshUiWithLatestDataFromServer(data: any): void {
     if (data) {
       this.id = data.id;
       this.pendingItems = data.pending;

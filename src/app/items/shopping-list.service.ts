@@ -15,7 +15,7 @@ export class ShoppingListService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public fetchData(id): Observable<object> {
+  public fetchLatestList(id): Observable<object> {
     console.log(`fetching data by id: ${id}`);
     if (id === undefined) {
       return this.httpClient.get(`${this.API_SERVER_URL}`);
