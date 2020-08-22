@@ -35,6 +35,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   interval: number;
   syncInProgress = false;
+  syncSuccess = true;
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
