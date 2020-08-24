@@ -208,7 +208,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.itemsMasterList.filter(option => option.toLowerCase().includes(filterValue));
+    return this.itemsMasterList.filter(option => filterValue.length > 1 && option.toLowerCase().includes(filterValue));
   }
 
   private enabledReload(): void {
