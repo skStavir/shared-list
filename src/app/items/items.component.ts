@@ -17,8 +17,8 @@ import {error} from 'selenium-webdriver';
 })
 export class ItemsComponent implements OnInit, OnDestroy {
 
-  serverUrl = 'http://localhost:4200?id=';
-  // serverUrl = 'https://quickshoppinglist.com?id=';
+  // serverUrl = 'http://localhost:4200?id=';
+  serverUrl = 'https://quickshoppinglist.com?id=';
 
   id: string;
   newItem: string;
