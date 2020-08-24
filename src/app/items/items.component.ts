@@ -190,6 +190,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
           this.itemsMasterList.push(item);
           this.itemCategories[itemInLowerCase] = itemList.category;
         });
+        this.itemsMasterList.sort((a, b) => a.length > b.length ? 1 : -1);
         this.categoryOrder[itemList.category] = itemList.order;
       });
       this.setUpAutocompleteFilter();
