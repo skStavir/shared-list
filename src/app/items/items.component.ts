@@ -120,6 +120,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     const index = this.pendingItems.indexOf(item);
     this.pendingItems.splice(index, 1);
     this.itemsMasterList.push(item);
+    this.sortByLength(this.itemsMasterList)
 
     this.arrangePending();
 
@@ -190,13 +191,17 @@ export class ItemsComponent implements OnInit, OnDestroy {
           this.itemsMasterList.push(item);
           this.itemCategories[itemInLowerCase] = itemList.category;
         });
-        this.itemsMasterList.sort((a, b) => a.length > b.length ? 1 : -1);
+        this.sortByLength(this.itemsMasterList);
         this.categoryOrder[itemList.category] = itemList.order;
       });
       this.setUpAutocompleteFilter();
       this.arrangePending();
       this.arrangeCart();
     });
+  }
+
+  private sortByLength(list) {
+    list.sort((a, b) => a.length > b.length ? 1 : -1);
   }
 
   private setUpAutocompleteFilter(): void {
