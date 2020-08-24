@@ -120,7 +120,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     const index = this.pendingItems.indexOf(item);
     this.pendingItems.splice(index, 1);
     this.itemsMasterList.push(item);
-    this.sortByLength(this.itemsMasterList)
+    this.sortByLength(this.itemsMasterList);
 
     this.arrangePending();
 
@@ -251,7 +251,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   private pushData(action, item): void {
     this.pendingForPush.push({action, item});
-    this.pushChain(this.pendingForPush[0]);
+    if (this.pendingForPush.length == 1) { // wait for the existing sync to complete
+      this.pushChain(this.pendingForPush[0]);
+    }
   }
 
   //Order of the actions is important
@@ -267,7 +269,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
         this.syncSuccess = true;
       }
     }, (error) => {
-      console.log('push failed. stopping push');
+      console.log('push failed. stopping push', error);
       this.syncSuccess = false;
     });
   }
