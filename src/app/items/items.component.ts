@@ -17,8 +17,8 @@ import {error} from 'selenium-webdriver';
 })
 export class ItemsComponent implements OnInit, OnDestroy {
 
-  // serverUrl = 'http://localhost:4200?id=';
-  serverUrl = 'https://quickshoppinglist.com?id=';
+  serverUrl = 'http://localhost:4200?id=';
+  // serverUrl = 'https://quickshoppinglist.com?id=';
 
   id: string;
   newItem: string;
@@ -37,6 +37,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   interval: number;
   syncSuccess = true;
   pendingForPush = [];
+  lastUpdated = new Date();
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
@@ -92,6 +93,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
     this.pushData('ADD', this.newItem);
     this.resetInput();
+    this.lastUpdated = new Date();
   }
 
   cart(item): void {

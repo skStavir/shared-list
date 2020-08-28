@@ -116,3 +116,13 @@ mat-divider {
   flex: 1 1 auto;
 }
 
+.lastUpdated {
+  text-align: center;
+  margin-top: 1em;
+  font-size: 50%
+}
+
+.done {
+  text-align: center;
+  margin-top: 1em;
+}
