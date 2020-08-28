@@ -17,8 +17,8 @@ import {error} from 'selenium-webdriver';
 })
 export class ItemsComponent implements OnInit, OnDestroy {
 
-  serverUrl = 'http://localhost:4200?id=';
-  // serverUrl = 'https://quickshoppinglist.com?id=';
+  // serverUrl = 'http://localhost:4200?id=';
+  serverUrl = 'https://quickshoppinglist.com?id=';
 
   id: string;
   newItem: string;
@@ -37,7 +37,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   interval: number;
   syncSuccess = true;
   pendingForPush = [];
-  lastUpdated = new Date();
+  lastUpdated = new Date(0);
 
   @ViewChild('pendingTable') pendingTable: MatTable<any>;
   @ViewChild('cartTable') cartTable: MatTable<any>;
@@ -105,6 +105,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.arrangeCart();
 
     this.pushData('PICKED', item);
+    this.lastUpdated = new Date();
   }
 
   pending(item): void {
@@ -116,6 +117,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.arrangeCart();
 
     this.pushData('DROPPED', item);
+    this.lastUpdated = new Date();
   }
 
   remove(item): void {
@@ -127,6 +129,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.arrangePending();
 
     this.pushData('REMOVE', item);
+    this.lastUpdated = new Date();
   }
 
   doneShopping(): void {
@@ -186,8 +189,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   private thisLoadItemsAndCategories(): void {
-    this.shoppingListService.getCategorizedItems().subscribe((categoyItems: any) => {
-      categoyItems.forEach((itemList) => {
+    this.shoppingListService.getCategorizedItems().subscribe((categoryItems: any) => {
+      categoryItems.forEach((itemList) => {
         itemList.items.forEach((item) => {
           const itemInLowerCase = item.toLowerCase();
           this.itemsMasterList.push(item);
@@ -286,6 +289,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
       this.cartedItems = data.cart;
       data.cart.forEach(item => this.removeItemFromMasterList(item));
       this.arrangeCart();
+
+      if (this.lastUpdated.getUTCMilliseconds() < data.lastUpdated) {
+        this.lastUpdated = new Date(data.lastUpdated);
+      }
     }
   }
 

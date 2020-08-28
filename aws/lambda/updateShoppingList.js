@@ -73,7 +73,7 @@ exports.handler = async (event) => {
     }
   };
 
-  let updateTime = Date.now();
+  let lastUpdated = Math.floor(new Date());
 
   let shoppingList = await dynamoDb.get(getParams, readCallBack()).promise();
 
@@ -94,7 +94,7 @@ exports.handler = async (event) => {
     return buildBadRequestResponse(`Invalid payload, action ${payload.action} is not supported`);
   }
 
-  shoppingList.updateTime = updateTime;
+  shoppingList.Item.lastUpdated = lastUpdated;
 
   //TODO exception handling
   //TODO optimistic locking and retry

@@ -17,13 +17,14 @@ const HEADERS = {
   "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
 };
 
-function buildInitialShoppingList(id) {
+function buildInitialShoppingList(id, lastUpdated) {
   let newParams = {
     TableName: 'shoppinglist',
     Item: {
       'id': id,
       'pending': ['Milk'],
       'cart': [],
+      'lastUpdated': lastUpdated
     }
   };
   return newParams;
@@ -65,7 +66,7 @@ exports.handler = async (event) => {
   if (typeof id === 'undefined' || !id) {
     //TODO use uuid
     id = generateId();
-    let newParams = buildInitialShoppingList(id);
+    let newParams = buildInitialShoppingList(id, Math.floor(new Date()));
     console.log('initializing database with generated id: ' + id);
     await dynamoDb.put(newParams, writeCallBack()).promise();
   }

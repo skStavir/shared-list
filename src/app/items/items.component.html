@@ -139,7 +139,7 @@
 </table>
 
 <div class="lastUpdated">
-  <span>Last updated on {{lastUpdated.toLocaleString()}}</span>
+  <span *ngIf="this.lastUpdated">Last updated on {{lastUpdated.toLocaleString()}}</span>
 </div>
 
 <div class="done">
