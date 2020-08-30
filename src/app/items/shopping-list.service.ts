@@ -30,8 +30,8 @@ export class ShoppingListService {
   }
 
   public getCategorizedItems(): Observable<object> {
-    const contentHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-    return this.httpClient.get(`${this.CATEGORIZED_ITEM_URL}`, { headers: contentHeader });
+    const contentHeader = new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+    return this.httpClient.get(`${this.CATEGORIZED_ITEM_URL}`, {headers: contentHeader});
   }
 
 }

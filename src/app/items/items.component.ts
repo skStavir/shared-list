@@ -8,7 +8,6 @@ import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {NgNavigatorShareService} from 'ng-navigator-share';
-import {error} from 'selenium-webdriver';
 
 @Component({
   selector: 'app-items',

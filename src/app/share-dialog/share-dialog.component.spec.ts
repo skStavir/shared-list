@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShareDialogComponent } from './share-dialog.component';
+import {ShareDialogComponent} from './share-dialog.component';
 
 describe('ShareDialogComponent', () => {
   let component: ShareDialogComponent;
@@ -8,9 +8,9 @@ describe('ShareDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShareDialogComponent ]
+      declarations: [ShareDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
