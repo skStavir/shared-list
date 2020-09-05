@@ -1,56 +1,74 @@
 <html>
-<title>QuickShoppingList - Never forget an item</title>
-<style>
-  h1 {
-    text-align: center;
-    margin-top: 1em;
-  }
+<head>
+  <title>QuickShoppingList - Never forget an item</title>
+  <style>
+    h1 {
+      text-align: center;
+      margin-top: 1em;
+    }
 
-  ul {
-    list-style: none; /* Remove default bullets */
-    margin-bottom: 1em;
-  }
+    ul {
+      list-style: none; /* Remove default bullets */
+      margin-bottom: 1em;
+    }
 
-  .heading {
-    color: #3F51B5;
-    font-size: 150%;
-  }
+    .heading {
+      color: #3F51B5;
+      font-size: 150%;
+    }
 
-  ul li::before {
-    content: "\2022";
-    color: #3F51B5;
-    font-weight: bold;
-    font-size: 150%;
-    display: inline-block;
-    width: 1em;
-    margin-left: 1em;
-    vertical-align: middle
-  }
+    ul li::before {
+      content: "\2022";
+      color: #3F51B5;
+      font-weight: bold;
+      font-size: 150%;
+      display: inline-block;
+      width: 1em;
+      margin-left: 1em;
+      vertical-align: middle
+    }
 
-  ul li {
-    font-weight: bold;
-    font-size: 150%;
-    vertical-align: middle;
-    color: rgba(16, 90, 181, 0.84)
-  }
+    ul li {
+      font-weight: bold;
+      font-size: 150%;
+      vertical-align: middle;
+      color: rgba(16, 90, 181, 0.84)
+    }
 
-  .text {
-    color: #3F51B5;
-    font-size: 150%;
-  }
+    .text {
+      color: #3F51B5;
+      font-size: 150%;
+    }
 
-  .footerText {
-    color: #f05500;
-    font-size: 75%;
-  }
+    .footerText {
+      color: #f05500;
+      font-size: 75%;
+    }
 
-  .footer {
-    margin-top: 2em;
-    text-align: right;
-    margin-bottom: 2em;
-    margin-right: 4em;
-  }
-</style>
+    .footer {
+      margin-top: 2em;
+      text-align: right;
+      margin-bottom: 2em;
+      margin-right: 4em;
+    }
+  </style>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177290622-1">
+  </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-177290622-1');
+  </script>
+</head>
+
 <body>
 <h1><span class="heading">Quick Shopping List</span></h1>
 <ul>
