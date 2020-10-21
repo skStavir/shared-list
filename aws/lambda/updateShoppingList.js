@@ -77,6 +77,7 @@ exports.handler = async (event) => {
 
   let shoppingList = await dynamoDb.get(getParams, readCallBack()).promise();
 
+  console.log("clientId " + payload.clientId);
   if (payload.action == 'ADD') {
     console.log(`includes ${shoppingList.Item.pending.includes(payload.item)}`);
     if (!shoppingList.Item.pending.includes(payload.item)) {
