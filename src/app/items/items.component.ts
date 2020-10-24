@@ -160,6 +160,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
     location.href = 'https://youtu.be/8lfitdnMaEs';
   }
 
+  policy(): void {
+    location.href = 'https://quickshoppinglist.com/privacypolicy.html';
+  }
+
   share(): void {
     try {
       this.ngNavigatorShareService.share({
