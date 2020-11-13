@@ -23,7 +23,7 @@ function buildInitialShoppingList(id, clientId, now) {
     Item: {
       'id': id,
       'clientId': clientId,
-      'pending': ['Milk'],
+      'pending': [],
       'cart': [],
       'lastUpdated': now,
       'created': now
