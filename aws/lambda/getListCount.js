@@ -1,28 +1,32 @@
 const AWS = require("aws-sdk");
 
 AWS.config.update({ region: 'ap-south-1' });
-const dynamoDb = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
+const dynamoDb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
 
 const params = {
     TableName: 'shoppinglist',
-    Count: true
 };
-
 
 exports.handler = async(event) => {
-    // TODO implement
-    dynamoDb.describeTable(params, function(err, data) {
+    console.log("getting item count");
+    
+    let out = await dynamoDb.describeTable(params, function(err, data) {
+        console.log("query done")
         if (err) {
-            console.err(err);
-        }
+            console.log(err, err.stack);
+            return err;
+        } // an error occurred
         else {
-            var table = data['Table'];
-            console.log("items = " + table['ItemCount']);
-        }
-    });
+            console.log("data" + data);
+            return data;
+        } // successful response
+
+    }).promise();
+    
+    console.log(out.Table.ItemCount);
     const response = {
         statusCode: 200,
-        body: JSON.stringify('Hello from Lambda!'),
+        body: out.Table.ItemCount,
     };
     return response;
-};
+}
