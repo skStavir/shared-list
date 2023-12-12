@@ -7,7 +7,7 @@ import {ShareDialogComponent} from '../share-dialog/share-dialog.component';
 import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
-import {NgNavigatorShareService} from 'ng-navigator-share';
+// import {NgNavigatorShareService} from 'ng-navigator-share';
 
 @Component({
   selector: 'app-items',
@@ -16,8 +16,8 @@ import {NgNavigatorShareService} from 'ng-navigator-share';
 })
 export class ItemsComponent implements OnInit, OnDestroy {
 
-  // serverUrl = 'http://localhost:4200?id=';
-  serverUrl = 'https://quickshoppinglist.com?id=';
+  serverUrl = 'http://localhost:4200?id=';
+  // serverUrl = 'https://quickshoppinglist.com?id=';
 
   id: string;
   newItem: string;
@@ -42,7 +42,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   @ViewChild('cartTable') cartTable: MatTable<any>;
 
   constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute, private router: Router,
-              private dialog: MatDialog, private ngNavigatorShareService: NgNavigatorShareService) {
+              private dialog: MatDialog/*, private ngNavigatorShareService: NgNavigatorShareService*/) {
     this.newItem = '';
     this.setDefaultPlaceholder();
   }
@@ -165,18 +165,18 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   share(): void {
-    try {
-      this.ngNavigatorShareService.share({
-        title: 'Quick Shopping List',
-        text: 'Here is our shopping list. Manage items or use it for shopping.',
-        url: `${this.serverUrl}${this.id}`
-      }).then((val) => console.log('success'), (err) => {
-        console.log('error');
-      });
-    } catch (error) {
-      console.log('You shopping list is not shared, reason: ', error);
-      this.shareDialog();
-    }
+    // try {
+    //   this.ngNavigatorShareService.share({
+    //     title: 'Quick Shopping List',
+    //     text: 'Here is our shopping list. Manage items or use it for shopping.',
+    //     url: `${this.serverUrl}${this.id}`
+    //   }).then((val) => console.log('success'), (err) => {
+    //     console.log('error');
+    //   });
+    // } catch (error) {
+    //   console.log('You shopping list is not shared, reason: ', error);
+    //   this.shareDialog();
+    // }
   }
 
   story(): void {

@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 export class ShoppingListService {
 
 
-  private API_SERVER_URL = 'https://api.quickshoppinglist.com';
+  private API_SERVER_URL = 'https://lx8aqza6oh.execute-api.us-east-1.amazonaws.com/deploy/v1/shared-list';
   private CATEGORIZED_ITEM_URL = 'https://s3.ap-south-1.amazonaws.com/quickshoppinglist.com/data/shoppingItems.json';
 
   constructor(private httpClient: HttpClient) {

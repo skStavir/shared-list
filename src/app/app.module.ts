@@ -49,9 +49,6 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatMenuModule,
     MatBadgeModule
   ],
-  entryComponents: [
-    ShareDialogComponent
-  ],
 
   providers: [],
   bootstrap: [AppComponent]

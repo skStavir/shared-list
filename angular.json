@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "quick-shopping-list"
+  "defaultProject": "quick-shopping-list",
+  "cli": {
+    "analytics": false
+  }
 }
