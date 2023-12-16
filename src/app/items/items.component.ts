@@ -16,7 +16,7 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class ItemsComponent implements OnInit, OnDestroy {
 
-  serverUrl = 'http://localhost:4200?id=';
+  serverUrl = 'https:/stavir.com/tools/sharedlist/index.html?id=';
   // serverUrl = 'https://quickshoppinglist.com?id=';
 
   id: string;
