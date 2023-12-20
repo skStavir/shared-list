@@ -40,13 +40,11 @@ This project also has the backend AWS lambda code. Auto build is enabled.
 
 To log the id and update it with changes in form of adding items to that particular id, a table was created in data base in Dynamodb namely shared-list with primary key ‘id’.
 
-##Lambda functions.
+## Lambda functions.
 
  Created three lambda functions from the code base namely:-
- 1.getshoppinglist
- 2.updateshoppinglist
- 3.CORS_function.
- from the code base provided through github.
+ getshoppinglist, updateshoppinglist, CORS_function from the code base provided through github.
+ 
  Getshoppinglist for generating an id and for calling with that id while updateshoppinglist for update the list with that given id and CORS_function to handle HTTP requests(get,put,options) and to allow CORS( 
  Cross Origin Resource Sharing). 
  Gave necessary IAM permissions in the form of role to the lambda functions so as toIntegrate it with the dynamodb table.
@@ -77,7 +75,7 @@ A file named shoppingitems.json was also uploaded to make the suggestion work wh
 
 The path to the index was given as ‘stavir.com/tools/sharedlist’.
 
-Finally making objects and folders public with ‘Access Control List’ in S3 and creating an invalidation inside the cloudfront distribution associated with the domain/s3bucket made the website live. 
+Finally making objects and folders public with ‘Access Control List’ in S3 and creating an invalidation inside the cloudfront distribution associated with the domain/s3bucket made the website live.
 
 
    
