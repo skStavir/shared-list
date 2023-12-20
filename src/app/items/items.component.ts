@@ -17,7 +17,7 @@ import {map, startWith} from 'rxjs/operators';
 export class ItemsComponent implements OnInit, OnDestroy {
 
   serverUrl = '?id=';
-  // serverUrl = 'https://quickshoppinglist.com?id=';
+  // serverUrl = 'https://stavir.com/tools/sharedlist?id=';
 
   id: string;
   newItem: string;
@@ -132,7 +132,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   doneShopping(): void {
-    alert('Thank you for using Quick shopping list. See you again');
+    alert('Thank you for using Shared List. See you again');
     // TODO revisit
     window.location.href = this.serverUrl;
   }
@@ -149,11 +149,11 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   // TODO retain the order of items in categorized list
   mailTo(): void {
-    location.href = 'mailto:support@onenzeros.in?subject=Quick Shopping List';
+    location.href = 'mailto:hr@stavir.com?subject=Shared List';
   }
 
   about(): void {
-    location.href = 'https://quickshoppinglist.com/about.html';
+    location.href = 'https://stavir.com/tools/sharedlist/about.html';
   }
 
   help(): void {
@@ -161,13 +161,13 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   policy(): void {
-    location.href = 'https://quickshoppinglist.com/privacypolicy.html';
+    location.href = 'https://stavir.com/tools/sharedlist/privacypolicy.html';
   }
 
   share(): void {
     // try {
     //   this.ngNavigatorShareService.share({
-    //     title: 'Quick Shopping List',
+    //     title: 'Shared List',
     //     text: 'Here is our shopping list. Manage items or use it for shopping.',
     //     url: `${this.serverUrl}${this.id}`
     //   }).then((val) => console.log('success'), (err) => {
@@ -180,7 +180,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   story(): void {
-    location.href = 'https://quickshoppinglist.com/story.html';
+    location.href = 'https://stavir.com/tools/sharedlist/story.html';
   }
 
   private isValidId() {

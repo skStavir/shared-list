@@ -16,7 +16,7 @@ exports.config = {
     browserName: 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: 'http://stavir.com/tools/sharedlist',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

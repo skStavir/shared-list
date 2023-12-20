@@ -1,10 +1,10 @@
 const AWS = require("aws-sdk");
 
-AWS.config.update({region: 'ap-south-1'});
+AWS.config.update({region: 'us-east-1'});
 const dynamoDb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
 const params = {
-  TableName: 'shoppinglist',
+  TableName: 'shared-list',
 };
 
 function generateId() {
@@ -19,7 +19,7 @@ const HEADERS = {
 
 function buildInitialShoppingList(id, clientId, now) {
   let newParams = {
-    TableName: 'shoppinglist',
+    TableName: 'shared-list',
     Item: {
       'id': id,
       'clientId': clientId,
