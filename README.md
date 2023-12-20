@@ -34,3 +34,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 This project also has the backend AWS lambda code. Auto build is enabled. 
+## AWS Part
+
+## Creation of Dynamodb table.
+
+  To log the id and update it with changes in form of adding items to that particular id, a table was created in data base in Dynamodb namely shared-list with primary key ‘id’.
+
+
