@@ -83,7 +83,7 @@ After successful build of the application soon after making changes within the c
  ‘ng build --configuration=production’, the files generated within the ‘dist’ folder has to be uploaded to the ‘stavir’ S3 bucket (stavir.com/tools/sharedlist) and make public with the changes.
  ![Screenshot 2023-12-20 125720](https://github.com/AjeshStavir/shared-list/assets/146941497/26067e82-1e27-46d3-8d7b-3b335a3d78f0)
 
-To make the suggestions work whenever a user types the first or two letter(s) of an item, a file named shoppingitems.json should me made live and give appropriate path to the privaste CATEGORIZED_ITEM_URL in shopping-list.service.ts code.
+To make the suggestions work whenever a user types the first or two letter(s) of an item, a file named shoppingitems.json should me made live and give appropriate path to the private CATEGORIZED_ITEM_URL in shopping-list.service.ts code.
 ![Screenshot 2023-12-20 125832](https://github.com/AjeshStavir/shared-list/assets/146941497/aa76a473-68fc-40a2-b687-5a003d6e400a)
 
 The path to the index embarked as ‘stavir.com/tools/sharedlist’.
