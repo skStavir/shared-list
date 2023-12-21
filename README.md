@@ -46,19 +46,20 @@ To log the id and update it with changes in form of adding items to that particu
  Created three lambda functions from the code base namely:-
  getshoppinglist, updateshoppinglist, CORS_function from the code base provided through github.
  
- Getshoppinglist for generating an id and for calling with that id while updateshoppinglist for update the list with that given id and CORS_function to handle HTTP requests(get,put,options) and to allow CORS( 
- Cross Origin Resource Sharing). 
- Gave necessary IAM permissions in the form of role to the lambda functions so as toIntegrate it with the dynamodb table.
- Testing the lambda function with appropriate payload (payload not for CORS_function)was done successfully.    
+ Getshoppinglist for generating an id and for calling with that id while updateshoppinglist to update the list with that given id and CORS_function to handle HTTP requests(get,put,options) and to allow CORS( Cross Origin Resource Sharing).
+  
+ Gave necessary IAM permissions in the form of role to the lambda functions so as to integrate functions with dynamodb table.
+ Test the lambda function with appropriate payload (payload not for CORS_function).    
 
 ## API gateway Integration
 
- API Gateway enables to connect APIs to various backend services, such as AWS Lambda functions, Amazon EC2 instances, or other HTTP endpoints. For connecting lambda functions to APIs we have created an API 'sharedlist'.
+ API Gateway enables to connect APIs to various backend services, such as AWS Lambda functions, Amazon EC2 instances, or other HTTP endpoints. For connecting lambda functions to APIs, create an API 'sharedlist' in aws.
 
-created the required routes for the api according with the lambda functions so here it is GET ( to get an id), GET {id} ( to get the id by calling a particular id), PUT( to update the shopping list associated with a particular id) and OPTIONS ( To describe the communication options for the target resource). 
+Create the required routes for the api according with the lambda functions. 
+ GET ( to get an id), GET {id} ( to get the id by calling a particular id), PUT( to update the shopping list associated with a particular id) and OPTIONS ( To describe the communication options for the target resource). 
 
-So Get and GET {id} was integrated with getshoppinglist lambda function and PUT on to updateshoppinglist function while OPTIONS on to CORS_function through
-‘Manage integration’.
+ Get and GET {id} was integrated with getshoppinglist lambda function and PUT on to updateshoppinglist function while OPTIONS on to CORS_function through ‘Manage integration’.
+
 
 ##  CORS Configuration within API gateway.
 
@@ -66,15 +67,18 @@ Access-control-allow-origin is configured with https://stavir.com
 Access-control-allow-headers is configured with content-type.
 Access-control-allow-methods with GET,PUT,OPTIONS.
 
-The api was tested through POSTMAN tool and ensured its successful availability.
+The api should be tested through API testing tool (POSTMAN tool) and ensure its successful availability.
 
 ## S3 Bucket configuration
 
-After successful build of the application soon after making changes within the code in angular js format, using the command ‘ng build’, the files generated within the ‘dist’ folder has to be uploaded to the ‘stavir’ S3 bucket and made public with the changes.
+After successful build of the application soon after making changes within the code in angular js format, using the command
+ ‘ng build --configuration=production’, the files generated within the ‘dist’ folder has to be uploaded to the ‘stavir’ S3 bucket and make public with the changes.
 
-A file named shoppingitems.json was also uploaded to make the suggestion work whenever a user types the first or two letter(s) of the item.
+To make the suggestions work whenever a user types the first or two letter(s) of an item, a file named shoppingitems.json should me made live and give appropriate path to the privaste CATEGORIZED_ITEM_URL in shopping-list.service.ts code.
 
-The path to the index was given as ‘stavir.com/tools/sharedlist’.
+The path to the index embarked as ‘stavir.com/tools/sharedlist’.
 
-Finally making objects and folders public with ‘Access Control List’ in S3 and creating an invalidation inside the cloudfront distribution associated with the domain/S3bucket made the website live.
+Finally making objects and folders public with ‘Access Control List’ in S3 and creating an invalidation inside the cloudfront distribution associated with the domain/S3bucket make the website live.
+
+
 
