@@ -1,6 +1,6 @@
 const AWS = require("aws-sdk");
 
-AWS.config.update({region: 'ap-south-1'});
+AWS.config.update({region: 'us-east-1'});
 const dynamoDb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
 const HEADERS = {
@@ -67,7 +67,7 @@ exports.handler = async (event) => {
 
   //Get the current version
   const getParams = {
-    TableName: 'shoppinglist',
+    TableName: 'shared-list',
     Key: {
       'id': payload.id
     }
@@ -100,7 +100,7 @@ exports.handler = async (event) => {
   //TODO exception handling
   //TODO optimistic locking and retry
   let writeParams = {
-    TableName: 'shoppinglist',
+    TableName: 'shared-list',
     Item: shoppingList.Item
   };
   await dynamoDb.put(writeParams, writeCallBack()).promise();
